@@ -1,5 +1,0 @@
-M300 S1111 P222 ;
-M291 S3 R"Bed Auto Compensation" P"Press OK to probe the bed, and activate bed compensation. The height map is stored in file /sys/heightmap.csv."
-G28
-M561 ; clear any bed transform
-G29 S0 ;

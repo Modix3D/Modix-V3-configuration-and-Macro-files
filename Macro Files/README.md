@@ -1,0 +1,2 @@
+# Modix-V3 Macro Files
+The macro files have been updated to be uniform across all the printers. All the macro files now work on G-code meta commands, and are adjust their movement based on the configuration files.

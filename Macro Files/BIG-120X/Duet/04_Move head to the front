@@ -1,7 +1,0 @@
-M300 P1333 S444
-M291 S3 R"Park at the front" P"The head will park at the front and left"
-M564 S1 H1
-G91            		; relative positioning
-G1 Z5 F360     		; lift Z by 5mm    
-G90     		
-G1 X100 Y100 F6000 
