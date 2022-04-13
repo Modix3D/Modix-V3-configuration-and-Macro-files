@@ -1,0 +1,19 @@
+M300 S1111 P333
+M25
+M291 S3 R"Filament Change" P"This macro should only be used while a file is being printed"
+M300 S1111 P444
+M564 H1 S1
+M291 R"Filament Change" P"Please wait for the temperature to reach the target" 
+M116
+G1 E-100 F800 										; retract 100mm of filament
+M400       
+M300 S1111 P222  
+M291 S2 R"Load filament" P"Load filament into the filament sensor and feed it all the way into the extruder. Press OK once completed"
+M300 S1222 P222 
+M291 S0 P"Extruding - Please wait" 			
+G1 E120 F800   										; extrude 120mm of filament
+G1 E10 F120   										; extrude 10mm of filament
+G1 E-5 F360   										; retract 5mm of filament
+M400
+M300 S1111 P333
+M291 R"Attention !" P"It is recommended to turn off the heaters if the pause is expected to last a long time" T46

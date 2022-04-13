@@ -1,0 +1,27 @@
+M300 S666 P666 		;
+M291 S3 R"Probe height adjustment" P"Press OK to continue, or CANCEL to abort"
+M280 P7 S160 I1	
+G4 P666
+M401 ; deploy BLTouch
+M291 S3 R"Attention!" P"Probe deployed. Verify it is lower than the nozzle"
+M402 ;
+G28
+M564 H0 S0			; Negative movements are allowed
+M561 ;
+G91 ;
+G1 Z11 F200;
+G90 ;
+G1 X222 Y222 F6000;
+M300 S666 P666 ; 
+G4 S1 ;
+M300 S1111 P444 ;
+M291 S2 R"Loosen the bolts holding the bracket" P"Place the jig beneath the probe and adjust the Z height until the nozzle almost touches the bed" Z1 ;
+M300 S888 P444 ; 
+M291 S2 R"Tighten the bolts" P"Varify the probe bracket is vertical" ;
+G4 S1 ;
+G91
+G1 Z11 F200
+G90
+M564 S1 H1      	; Disable negative movements
+M300 S1111 P666 ; 
+M291 S2 R"You may proceed to the next step" P" Probe calibration has been completed" ;

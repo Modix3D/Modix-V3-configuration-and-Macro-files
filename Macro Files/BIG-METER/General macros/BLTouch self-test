@@ -1,0 +1,7 @@
+M291 S3 R"BLTouch self-test" P"The BLTouches pin will be deployed and retracted ten times - Press OK to continue"
+M280 P7 S60 
+M42 P27 S100		; Turn on LED
+G4 S1
+M280 P7 S120 
+G4 S9
+M291 R"Thank you" P"BLTouch self-test has been accomplished" T46

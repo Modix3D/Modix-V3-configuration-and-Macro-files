@@ -1,0 +1,42 @@
+M300 S555 P666 ;
+M291 S3 P"Press OK to continue, or CANCEL to abort"
+M671 X-181:-181:1049:1049 Y1066:-58:-58:1066 S10    			  	; Anticlockwise
+M280 P7 S160
+M300 S1888 P444					; Beep
+M561
+G28 						; Home
+M561
+M42 P27 S100 					; Main LED on
+M558 P9 H25 F120 T9000 A1 R0.7
+G30 P0 X10 Y10 Z-99999  			; Probe near a leadscrew
+G30 P1 X980 Y10 Z-99999 			; Probe near a leadscrew
+G30 P2 X980 Y980 Z-99999			; Probe near a leadscrew 
+G30 P3 X10 Y980 Z-99999 S4   		; Probe near a leadscrew
+M400
+M300 S1111 P444					; Beep
+M558 P9 H5 F120 T9000 A1 R0.7 
+G4 S1
+G30 P0 X10 Y10 Z-99999  			; Probe near a leadscrew
+G30 P1 X980 Y10 Z-99999 			; Probe near a leadscrew
+G30 P2 X980 Y980 Z-99999			; Probe near a leadscrew 
+G30 P3 X10 Y980 Z-99999 S4   		; Probe near a leadscrew
+M400
+M300 S1111 P444		
+M557 X-14:974 Y21:1009 S52 		        ; Define mesh grid. 400 Points
+M291 S3 R"Bed Mapping" P"The printer will now generate a new heightmap of 400 points"   ;
+G28 
+M561						; home
+G29 S0  					; probe the bed and enable compensation
+M42 P27 S0 					; Main LED off
+M300 S1888 P888
+G4 P999
+M42 P27 S100 					; Main LED on
+M300 S888 P888
+G4 P999
+M42 P27 S0 					; Main LED off
+M300 S1888 P888
+G4 P999
+M42 P27 S100 					; Main LED on
+G28 						; home
+M300 S1600 P555
+M291 S2 P"The bed plate is calibrated and the heightmap is loaded"

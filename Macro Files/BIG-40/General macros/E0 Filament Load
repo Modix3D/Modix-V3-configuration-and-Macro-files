@@ -1,0 +1,27 @@
+M300 S1333 P222 ;
+M291 S3 R"Filament Change" P"If during a print - please press CANCEL and choose ""Filament Change"" instead"
+M300 S2222 P222; 
+M25 ; In case pause has not been invoked
+M291 S3 R"Loading filament" P"Press OK and wait while the nozzle is being heated up"  ; Display message
+G10 P0 S210    ;
+T0
+M116 P0
+M564 H1 S1
+G91
+G1 X-405 Y-405 F6000 	; go to X=0 Y=0
+G90
+M83            ; relative extruder moves
+G1 E-100 F800 										; retract 100mm of filament
+M400       
+M300 S1111 P222  
+M291 S2 R"Load filament" P"Load filament into the filament sensor and feed it all the way into the extruder. Press OK once completed"
+M300 S1222 P222 
+M291 S0 P"Extruding - Please wait" 			
+G1 E120 F800   										; extrude 120mm of filament
+G1 E10 F120   										; extrude 10mm of filament
+G1 E-5 F360   										; retract 5mm of filament
+M400
+M300 S1111 P333
+M291 S3 R"Filament change" P"Filament change has been completed - press OK to cool down the heater or press CANCEL to keep the temperatures up" ;
+G10 P0 R0 S0
+T-1 P0
