@@ -1,6 +1,5 @@
 M300 S666 P666 		;
 M291 S3 R"Probe height adjustment" P"Press OK to continue, or CANCEL to abort"
-M280 P7 S160 I1	
 G4 P666
 M401 ; deploy BLTouch
 M291 S3 R"Attention!" P"Probe deployed. Verify it is lower than the nozzle"

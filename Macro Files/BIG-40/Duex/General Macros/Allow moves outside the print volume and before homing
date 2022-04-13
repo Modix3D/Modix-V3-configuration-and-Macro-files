@@ -1,0 +1,3 @@
+M300 S999 P444
+M564 H0 S0
+M291 P"To return to defult settings, turn the printer off and then on again, or send: M564 H1 S1 "

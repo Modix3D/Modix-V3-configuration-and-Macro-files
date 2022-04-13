@@ -1,5 +1,0 @@
-M300 S1111 P222
-M400
-M291 S2 R"Status report" P"A full report shown when the macro file is activated through the web interface, using this macro via the touch screen will result in an incomplete report"
-M36
-M27

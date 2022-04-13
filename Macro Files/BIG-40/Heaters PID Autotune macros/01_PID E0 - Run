@@ -1,8 +1,0 @@
-M300 S666 P666 ;
-M291 S3 R"Attention!" P"During auto tuning there is minimal protection against heating faults. Therefore you should not leave the printer unattended"
-M570 H1 P120 T50			; Extend the heater H1 fault timeout to 120 seconds for testing
-M106 P0 S255
-M106 P1 S255
-G4 S1
-M303 H1 P1 S240
-

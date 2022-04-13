@@ -1,6 +1,0 @@
-M300 S666 P333 ;
-M570 H1 P5 T15
-M307 H1
-M291 S2 R"Fill the values to M307 line in config.g" P"gain=A, time constant=C, dead time=D, calibration voltage=V" 
-M106 S0
-M291 S2 R"An example" P"gain 19, time constant 26, dead time 4, calibration voltage 24, Should be wiritten as: M307 H2 A19 C26 D4 V24 B0" 

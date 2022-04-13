@@ -1,0 +1,20 @@
+M300 S666 P666 ;
+M291 S3 P"Press OK to continue, or CANCEL to abort"
+G28
+M564 H0 S0             ;Negative movements are allowed
+M561 ;
+G90 ;
+G1 X20 Y100 F6000;
+M300 S1111 P666 ; 
+G4 S1 ;
+M291 S2 R"Height clearance" P"Place a paper sheet under the nozzle and raise the bed until slight friction can be noticed" Z1 ;
+G92 Z0 ;
+G91     ;
+G1 Z11 F200 ;
+G90
+G4 S1 ;
+M300 S666 P666 ;  
+M291 S2 R"Height clearance" P"Please remove the paper sheet and wait for the bed-probing to begin"  ;
+G30 S-1 ;
+M564 S1 H1      	; Negative movements are forbidden
+M291 S2 R"Height clearance" P"Copy the reported height value on the G-Code console and paste it into the config.g file"  ;
