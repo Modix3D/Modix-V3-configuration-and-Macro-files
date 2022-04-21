@@ -1,6 +1,16 @@
 # Modix V3 configuration and Macro files
 
-Version 2.1 Configuration and Macro files update notes:
+We are updating the naming scheme for the firmware updates. The naming scheme will now depend on the compatible RepRapFimware version, followed by a letterd schema to indicate the variant of the configuration and macro files.
+
+For example:
+
+Version 3.3 Config B
+
+This is compatible with RepRapFimware 3.3, and it's the second update to the configuration files (Config B)
+
+If an update to RepRapFirmware happens, and the configuration files also match, this will be Version 3.4 Config A for the first release.
+
+Config B update notes:
 
 Homing, tilt and bed calibration
 - Improved the homing and calibration files to properly load and unload the heightmap, and properly establish the Z=0 datum
@@ -22,7 +32,8 @@ Config.g adjustments:
 
 Config_probe.g is a new file. This is where the BLTouch related settings are now loaded in. This allows multiple files to load in the correct BLTouch data, preventing the possibility of the BLTouch data not being properly loaded
 
-Macro adjustments:
+Macro B update notes
+
 - All macro files are now identical across all printers. 
 - Changed the order of the calibration macros to be the same for all printers. It now goes probe -> Z-offset -> tilt -> bed compensation
 - The LED on and off macros are now LED toggle, which toggles the LED between on and off.
