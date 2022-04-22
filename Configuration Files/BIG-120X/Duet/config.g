@@ -74,12 +74,12 @@ M143 H0 S285                                    			; set temperature limit for h
 
 
 ; Fans & LED_________________________________________________________
-M950 F0 C"Primary blower fan" Q500                          ; create fan 0 on pin fan0 and set its frequency
-M106 P0 S0 H-1                                  			; set fan 0 value. 
-M950 F1 C"Secondary blower fan" Q500                        ; create fan 1 on pin fan1 and set its frequency
-M106 P1 S0 H-1                                  			; set fan 1 value. 
-M950 F2 C"LED" Q500                            				; create LED on pin fan2 and set its frequency
-M106 P2 S0 H-1                               				; Disable fan channel for LED
+M950 F0 C"fan0" Q500                          				; create fan 0 on pin fan0 and set its frequency
+M106 P0 S0 H-1 C"Primary blower fan"						; set fan 0 value. 
+M950 F1 C"fan1" Q500                        				; create fan 1 on pin fan1 and set its frequency
+M106 P1 S0 H-1 C"Secondary blower fan"						; set fan 1 value. 
+M950 F2 C"fan2" Q500                            			; create LED on pin fan2 and set its frequency
+M106 P2 S0 H-1 C"LED"                               		; Disable fan channel for LED
 
 
 ; Tools______________________________________________________________
