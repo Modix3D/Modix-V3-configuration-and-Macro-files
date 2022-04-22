@@ -44,7 +44,7 @@ G1 Z10 F200		; Raise nozzle 10mm
 G90 			; absolute movements
 M300 S666 P666 	; beep
 
-G1 X{(move.axes[0].max-move.axes[0].min)-5} Y{(move.axes[1].min-move.axes[1].min)+5}  ; Front right
+G1 X{(move.axes[0].max-move.axes[0].min)-5} Y{(move.axes[1].min-move.axes[1].min)+5} F6000 ; Front right
 
 G91 			; relative moves
 G1 Z-10 F200	; lower nozzle 10mm
@@ -59,7 +59,7 @@ G91 			; relative moves
 G1 Z10 F200		; Raise nozzle 10mm
 G90 			; absolute movements
 M300 S666 P666 	; beep
-G1 X{(move.axes[0].max-move.axes[0].min)-5} Y{(move.axes[1].max-move.axes[1].min)-5}  ; rear right
+G1 X{(move.axes[0].max-move.axes[0].min)-5} Y{(move.axes[1].max-move.axes[1].min)-5} F6000 ; rear right
 
 G91 			; relative moves
 G1 Z-10 F200	; lower nozzle 10mm
@@ -74,7 +74,7 @@ G91 			; relative moves
 G1 Z10 F200		; Raise nozzle 10mm
 G90 			; absolute movements
 M300 S666 P666 	; beep
-G1 X{(move.axes[0].min-move.axes[0].min)+5} Y{(move.axes[1].max-move.axes[1].min)-5}  ; rear right
+G1 X{(move.axes[0].min-move.axes[0].min)+5} Y{(move.axes[1].max-move.axes[1].min)-5} F6000 ; rear right
 
 G91 			; relative moves
 G1 Z-10 F200	; lower nozzle 10mm
