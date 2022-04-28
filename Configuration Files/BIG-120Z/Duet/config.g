@@ -11,7 +11,7 @@ M575 P1 B57600 S1											; Set auxiliary serial port baud rate and require ch
 
 
 ; Network_____________________________________________________________________
-M550 P"Big 120Z"                      				; set printer name
+M550 P"Big 120Z"                      						; set printer name
 ;M551 P"MODIX3D"               								; Set password (optional)
 M552 S1                                        				; enable network
 ;M552 P0.0.0.0												; Uncomment this command for using Duet Ethernet board
@@ -67,10 +67,10 @@ M950 H0 C"e0heat" T0                            			; create nozzle heater output
 M143 H0 S285                                    			; set temperature limit for heater 0 to 280C
 
 ;E1_________________________________________________________________
-;M308 S1 P"e1temp" Y"thermistor" T100000 B4725   			; configure sensor 1 as thermistor on pin e1temp
-;M950 H1 C"e1heat" T1                            			; create nozzle heater output on e1heat and map it to sensor 1
+M308 S1 P"e1temp" Y"thermistor" T100000 B4725   			; configure sensor 1 as thermistor on pin e1temp
+M950 H1 C"e1heat" T1                            			; create nozzle heater output on e1heat and map it to sensor 1
 ;M307 H1 B0 S1.00                               			; PID calibration
-;M143 H1 S285                                    			; set temperature limit for heater 1 to 280C
+M143 H1 S285                                    			; set temperature limit for heater 1 to 280C
 
 
 ; Fans & LED_________________________________________________________
@@ -89,9 +89,9 @@ G10 P0 X0 Y0 Z0                                 			; set tool 0 axis offsets
 G10 P0 R0 S210                                  			; set initial tool 0 active and standby temperatures to 0C
 
 ;T1_________________________________________________________________
-;M563 P1 S"E1 Secondary" D1 H1 F1                			; define tool 1
-;G10 P1 X0 Y49 Z0                                			; set tool 1 axis offsets
-;G10 P1 R0 S210                                    			; set initial tool 1 active and standby temperatures to 0C
+M563 P1 S"E1 Secondary" D1 H1 F1                			; define tool 1
+G10 P1 X0 Y49 Z0                                			; set tool 1 axis offsets
+G10 P1 R0 S210                                    			; set initial tool 1 active and standby temperatures to 0C
 
 ; Filament sensor settings__________________________________________________
 M591 D0 P1 C"e0stop" S1										; Regular filament sensor for E0
