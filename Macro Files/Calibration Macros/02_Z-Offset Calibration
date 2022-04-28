@@ -14,10 +14,13 @@ M291 S2 R"Test Z Probe Trigger Height - Step 1" P"Place a paper sheet under the 
 
 G92 Z0                       ; the nozzle should now be just touching the bed so set the logical Z position to match the physical Z position
 M300 S666 P666               ; beep
-G1 Z5 F300                   ; insure Z position will allow for probing
+G1 Z8 F300                   ; insure Z position will allow for probing
+M400						 ; wait for the movement to stop
 
-M400
 M291 S2 R"Test Z Probe Trigger Height - Step 2" P"Please remove the paper sheet and wait for the bed-probing to begin" ;
-G30 S-1                      ; probe the bed and report the Z probe trigger height
+G30 S-1                       ; probe the bed and report the Z probe trigger height
 M564 S1 H1                   ; respect axis limits
 M291 S2 R"Test Z Probe Trigger Height - Step 3" P"Copy the reported height value on the G-Code console and paste it into the probe_config.g file"
+
+M400						 ; wait for the movement to stop
+G1 Z5 F300                   ; Lift up the nozzle again so it's not pressed against the bed surface
