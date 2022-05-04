@@ -14,7 +14,7 @@ Config B update notes:
 
 Homing, tilt and bed calibration
 - Improved the homing and calibration files to properly load and unload the heightmap, and properly establish the Z=0 datum
-- Adjusted the homing position to be in the middle of the build area for all printers.
+- Adjusted the homing position to be in the front left of the build area for all printers.This way the front left corner (which is X0, Y0) now also has Z=0
 - Updated the homing, tilt and bed calibration files to reference the min/max position, rather than a fixed number, so they are usable across all printers.
 
 Adjusted the pausing and resume functionality
