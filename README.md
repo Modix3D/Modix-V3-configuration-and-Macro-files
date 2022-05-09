@@ -21,6 +21,13 @@ Adjusted the pausing and resume functionality
 - Adjusted the resume.g to be a bit slower speed and changed the m116 S value from S7 to S3, to be slightly closer to printing temperatures 
 - Changed the pause.g to un-select the used printhead, so that it cools down during the pause
 
+Added filament-error0.g and filament-error1.g
+- These trigger if the primary or secondary filament sensors (or clog detectors) trigger. This allows you to differentiate between a user-initiated pause, or a pause caused by a filament runout error.
+- The messages differentiate between the two tools
+
+Added stop.g functionality
+- Allows you to use M0 in the end-gcode of your print, allowing for more unified end-gcode. It has been populated by our suggested end-gcode.
+
 Mesh bed and adjustments:
 - Adjusted the M557 parameters, now uses P for spacing instead of S. it uses between a 8x8 (for 40) to 30:10 (180x) to 15:15 (meter) grid instead of a set distance. Changed the mesh area to be -1mm from each edge
 - Adjusted the M376 H value from H10 to H100, to better work with the large bed size  Modix printers.
