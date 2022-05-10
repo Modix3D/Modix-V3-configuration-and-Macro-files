@@ -1,7 +1,14 @@
-M300 P1333 S444
+M300 P1333 S444																				; beep
 M291 S3 R"Park at the front" P"The head will park at the front and left"
-M564 S1 H1
-G91            		; relative positioning
-G1 Z5 F360     		; lift Z by 5mm    
-G90     		
-G1 X100 Y100 F6000 
+M564 S1 H1																					; Ensure axis limits are respected
+G91																							; relative moves
+if {(move.axes[2].machinePosition) < (move.axes[2].max - 10)} 								; check if there's sufficient space to raise head
+	M291 P{"Raising head to...  " ^ move.axes[2].machinePosition+5}  R"Raising head" S0 T3	; message
+	G1 Z+5 F3000 																			; move Z up a bit
+else
+	M291 P{"Cannot raise head- insufficient space  " ^ move.axes[2].machinePosition ^ " : " ^ (move.axes[2].max - 10) ^ "."} R"Raising head" S0 T3
+	G4 S3 																					; wait for popup to display
+	
+G90																							; absolute moves
+G1 X50 Y50 F6000  																			; move quickly to the front left
+M300 S1111 P333																				; beep

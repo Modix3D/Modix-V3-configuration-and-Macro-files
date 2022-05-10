@@ -3,5 +3,5 @@ M291 S3 R"Resume print after a power outage" P"Press OK to resume, or CANCEL to 
 G10 P0 S200
 G10 P1 S200
 M291 S2 R"Heating up" P"Press OK and wait for the the nozzle to heat up" 
-M116 S7
+M116 S4
 M916

@@ -44,3 +44,5 @@ Macro B update notes
 - All macro files are now identical across all printers. 
 - Changed the order of the calibration macros to be the same for all printers. It now goes probe -> Z-offset -> tilt -> bed compensation
 - The LED on and off macros are now LED toggle, which toggles the LED between on and off.
+- filament change macro has been updated, slightly lower retraction/extrusion speed, and uses relative extruder movements. Also properly re-selects the tools after pausing
+- 
