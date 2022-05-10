@@ -27,10 +27,10 @@ M569 P3 S1													; Physical drive 3 . Main Extruder
 M569 P4 S0													; Physical drive 4 . Secondary Extruder
 ;Duex5 board_____________________________________________________________________
 M569 P5 S0													; Physical drive 5 . Y
-M569 P6 S0													; Physical drive 6 . Z1 (0,1000) 
+M569 P6 S0													; Physical drive 6 . Z1 (0,400) 
 M569 P7 S0													; Physical drive 7 . Z2 (0,0) 
-M569 P8 S0													; Physical drive 8 . Z3 (1000,0) 
-M569 P9 S0													; Physical drive 9 . Z4 (1000,1000) 
+M569 P8 S0													; Physical drive 8 . Z3 (400,0) 
+M569 P9 S0													; Physical drive 9 . Z4 (400,400) 
 
 ;Settings_________________________________________________________
 M584 X0:1 Y5 Z6:7:8:9 E3:4 P3								; Driver mapping

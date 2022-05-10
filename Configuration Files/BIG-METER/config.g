@@ -10,7 +10,7 @@ M555 P2														; Set output to look like Marlin
 M575 P1 B57600 S1											; Set auxiliary serial port baud rate and require checksum (for PanelDue)
 
 ; Network_____________________________________________________________________
-M550 P"Big Meter"												; set printer name
+M550 P"Big Meter"											; set printer name
 ;M551 P"MODIX3D"											; Set password (optional)
 M552 S1														; enable network
 ;M552 P0.0.0.0												; Uncomment this command for using Duet Ethernet board
@@ -34,7 +34,7 @@ M569 P9 S0													; Physical drive 9 . Z4 (1000,1000)
 
 ;Settings_________________________________________________________
 M584 X0:1 Y5 Z6:7:8:9 E3:4 P3								; Driver mapping
-M671 X-185:-185:1068:1068 Y1068:-46:-46:1068 S30    	; Anticlockwise 
+M671 X-185:-185:1068:1068 Y1068:-46:-46:1068 S30    		; Anticlockwise 
 ;___________________________________________________________________
 M350 X16 Y16 E16:16 I1  		                           	; Configure microstepping with interpolation
 M350 Z16 I0              		                			; Configure microstepping without interpolation
