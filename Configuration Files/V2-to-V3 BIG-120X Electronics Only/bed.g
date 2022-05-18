@@ -1,3 +1,4 @@
+; big 120x v2 to v3 tilt calibration
 M291 S3 R"Tilt calibration" P"Press OK to continue, or CANCEL to abort"
 
 M98 P"config_probe.g"   		; insure probe is using most recent configuration values
@@ -28,7 +29,7 @@ G1 Z10 F200		; Raise nozzle 10mm
 G90 			; absolute movements
 M300 S666 P666 	; beep
  
-G1 X{move.axes[0].min+2} Y{move.axes[1].min+2} F6000 ; Front left
+G1 X{move.axes[0].min+2} Y{move.axes[1].min+2} F6000 ; front left
 
 G91 			; relative moves
 G1 Z-10 F200	; lower nozzle 10mm
@@ -44,7 +45,7 @@ G1 Z10 F200		; Raise nozzle 10mm
 G90 			; absolute movements
 M300 S666 P666 	; beep
 
-G1 X{move.axes[0].max-2} Y{move.axes[1].min+2} F6000 ; Front right
+G1 X{move.axes[0].max-2} Y{move.axes[1].min+2} F6000 ; front right
 
 G91 			; relative moves
 G1 Z-10 F200	; lower nozzle 10mm
@@ -59,6 +60,7 @@ G91 			; relative moves
 G1 Z10 F200		; Raise nozzle 10mm
 G90 			; absolute movements
 M300 S666 P666 	; beep
+
 G1 X{move.axes[0].max-2} Y{move.axes[1].max-2} F6000 ; rear right
 
 G91 			; relative moves
@@ -74,7 +76,8 @@ G91 			; relative moves
 G1 Z10 F200		; Raise nozzle 10mm
 G90 			; absolute movements
 M300 S666 P666 	; beep
-G1 X{move.axes[0].min+2} Y{move.axes[1].max-2} F6000 ; rear right
+
+G1 X{move.axes[0].min+2} Y{move.axes[1].max-2} F6000 ; rear left
 
 G91 			; relative moves
 G1 Z-10 F200	; lower nozzle 10mm

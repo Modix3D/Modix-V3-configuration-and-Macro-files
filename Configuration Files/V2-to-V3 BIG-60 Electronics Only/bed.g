@@ -28,14 +28,14 @@ G1 Z10 F200		; Raise nozzle 10mm
 G90 			; absolute movements
 M300 S666 P666 	; beep
  
-G1 X{move.axes[0].min+2} Y{move.axes[1].min+2} F6000 ; Front left
+G1 X{move.axes[0].min+2} Y{(move.axes[1].max-move.axes[1].min)/2} F6000 ; left center
 
 G91 			; relative moves
 G1 Z-10 F200	; lower nozzle 10mm
 G90 			; absolute movements
 M18 Z 			; disable Z stepper motors
 
-M291 S2 R"Front-Left corner" P"Place the bracket and adjust the Z height by manually rotating the ball screw until slight friction can be noticed" ; 
+M291 S2 R"Left side" P"Place the bracket and adjust the Z height by manually rotating the ball screw until slight friction can be noticed" ; 
 M300 S666 P666 ; beep
 M291 S2 R"Please remove the bracket" P"Press OK only after the bracket has been removed"  ;
 
@@ -44,7 +44,7 @@ G1 Z10 F200		; Raise nozzle 10mm
 G90 			; absolute movements
 M300 S666 P666 	; beep
 
-G1 X{move.axes[0].max-2} Y{move.axes[1].min+2} F6000 ; Front right
+G1 X{move.axes[0].max-2} Y{move.axes[1].min+2} F6000 ; front right
 
 G91 			; relative moves
 G1 Z-10 F200	; lower nozzle 10mm
@@ -59,6 +59,7 @@ G91 			; relative moves
 G1 Z10 F200		; Raise nozzle 10mm
 G90 			; absolute movements
 M300 S666 P666 	; beep
+
 G1 X{move.axes[0].max-2} Y{move.axes[1].max-2} F6000 ; rear right
 
 G91 			; relative moves
@@ -73,19 +74,7 @@ M291 S2 R"Please remove the bracket" P"Press OK only after the bracket has been 
 G91 			; relative moves
 G1 Z10 F200		; Raise nozzle 10mm
 G90 			; absolute movements
-M300 S666 P666 	; beep
-G1 X{move.axes[0].min+2} Y{move.axes[1].max-2} F6000 ; rear right
 
-G91 			; relative moves
-G1 Z-10 F200	; lower nozzle 10mm
-G90 			; absolute movements
-M18 Z 			; disable Z stepper motors
-
-M291 S2 R"Rear-Left" P"Place the bracket and adjust the Z height by manually rotating the ball screw until slight friction can be noticed" ;
-
-
-M300 S666 P666 	; beep
-M291 S2 R"Please remove the bracket" P"Press OK only after the bracket has been removed"  
 M300 S666 P666 	; beep
 M564 S1 H1     	; Negative movements are forbidden
 M291 S2 R"Tilt calibration has been completed" P"You may proceed to the next step"
