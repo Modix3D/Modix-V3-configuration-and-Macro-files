@@ -30,16 +30,15 @@ M569 P4 S0                                                  ; Physical drive 4 g
 M584 X0 Y1 Z2 E3:4 P3										; Driver mapping
 
 ;___________________________________________________________________
-M350 X16 Y16 E16:16 I1  		                           	; Configure microstepping with interpolation
-M350 Z16 I0              		                			; Configure microstepping without interpolation
-M92 X100 Y100 Z2000 E418.5:418.5       						; Set steps per mm
-M566 X240 Y360 Z30 E120:120 P1               				; Set maximum instantaneous speed changes (mm/min)
-M203 X9000 Y9000 Z200 E12000:12000     						; Set maximum speeds (mm/min)
-M201 X1000 Y1000 Z120 E500:500              				; Set accelerations (mm/s^2)
-M204 P500                                      				; Set print and travel accelerations  (mm/s^2)
-M906 X1800 Y1800 E1000:1000 I50 							; Set motor currents (mA) and motor idle factor in per cent
-M906 Z2400 I50 												; Set motor currents (mA) and motor idle factor in per cent
-M84 S100                                          			; Set idle timeout - 100 seconds
+M350 X16 Y16 Z16 E16:16 I1									; Configure microstepping with interpolation
+M92 X100 Y100 Z2000 E418.5:418.5							; Set steps per mm
+M566 X360 Y360 Z120 E3600:3600 P1							; Set maximum instantaneous speed changes (mm/min)
+M203 X9000 Y9000 Z200 E12000:12000							; Set maximum speeds (mm/min)
+M201 X1000 Y1000 Z120 E1000:1000							; Set accelerations (mm/s^2)
+M204 P500													; Set print and travel accelerations  (mm/s^2)
+M906 X1800 Y1800 E1000:1000 I50								; Set motor currents (mA) and motor idle factor in per cent
+M906 Z2400 I50												; set Z motor currents
+M84 S100													; Set idle timeout - 100 seconds
 
 
 ; Axis Limits
