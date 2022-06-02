@@ -67,12 +67,16 @@ M140 H-1                                       				; disable heated bed (overrid
 
 ;E0_________________________________________________________________
 M308 S0 P"e0temp" Y"thermistor" T100000 B4725   			; configure sensor 0 as thermistor on pin e0temp
+;M308 S0 P"spi.cs1" Y"rtd-max31865"							; Configure sensor 0 as PT100 via the daughterboard
+;M308 S0 P"e0temp" Y"pt1000"								; Configure sensor 0 as PT1000 on pin e0temp
 M950 H0 C"e0heat" T0                            			; create nozzle heater output on e0heat and map it to sensor 0
 ;M307 H0 B0 S1                               				; PID calibration
 M143 H0 S285                                    			; set temperature limit for heater 0 to 285C
 
 ;E1_________________________________________________________________
 M308 S1 P"e1temp" Y"thermistor" T100000 B4725   			; configure sensor 1 as thermistor on pin e1temp
+;M308 S1 P"spi.cs2" Y"rtd-max31865"							; Configure sensor 1 as PT100 via the daughterboard
+;M308 S1 P"e1temp" Y"pt1000"								; Configure sensor 0 as PT1000 on pin e0temp
 M950 H1 C"e1heat" T1                            			; create nozzle heater output on e1heat and map it to sensor 1
 ;M307 H1 B0 S1                               				; PID calibration
 M143 H1 S285                                    			; set temperature limit for heater 1 to 285C
@@ -106,6 +110,28 @@ G10 P1 R0 S210                                    			; set initial tool 1 active
 ; Automatic power saving____________________________________________
 M911 S22.5 R29.0 P"M913 X0 Y0 G91 M83 G1 Z3 E-5 F1000"     	; Set voltage thresholds and actions to run on power loss. Power Failure Pause
 
-; Custom settings__________________________________________________
+; Filament Sensor settings__________________________________________________
 M591 D0 P1 C"duex.e2stop" S1								; Regular filament sensor for E0
 M591 D1 P1 C"duex.e3stop" S1								; Regular filament sensor for E1
+
+; Add-on settings__________________________________________________
+
+; Primary hotend Clog detector__________________________________________________
+;M950 J0 C"duex.e2stop" 									; create Input Pin 0 on pin E2 to for M581 Command.
+;M581 T1 P0 S0 R1 											; Runout switch for E0 As External Trigger
+;M591 D0 P7 C"e1stop" S1 L4.2 E10 R10:1000					; Clog Detector E0 [Add-On]
+
+;Secondary hotend Clog detector__________________________________________________
+;M950 J1 C"exp.e3stop"  					  				; create Input Pin 1 on pin E3 to for M581 Command.
+;M581 T1 P1 S0 R1											; Runout switch for E1 As External Trigger
+;M591 D1 P7 C"zstop" S1 L3.14 E10 R10:300					; Clog Detector E1 [Add-On]
+
+; Crash detector__________________________________________________
+;M950 J2 C"duex.e4stop" 									; create Input Pin 2 on pin E4 to for M581 Command.
+;M581 P2 T0 S0 R0											; Crash Detector   [Add-On]
+
+; Emergency stop button__________________________________________________
+;M950 J3 C"duex.e6stop" 									; create Input Pin 2 on pin E4 to for M581 Command.
+;M581 P3 T0 S1 R0 											; Emergency stop [Add-On]
+;M581 P3 T1 S1 R1											; Emergency stop, pause the print [Add-On]
+;M581 P3 T1 S1 R0 											; Emergency stop, pause always [Add-On]
