@@ -134,3 +134,7 @@ M591 D1 P1 C"duex.e3stop" S1								; Regular filament sensor for E1
 ;M581 P3 T0 S1 R0 											; Emergency stop [Add-On]
 ;M581 P3 T1 S1 R1											; Emergency stop, pause the print [Add-On]
 ;M581 P3 T1 S1 R0 											; Emergency stop, pause always [Add-On]
+
+; Automatic Z Offset Calibration____________________________________
+;global ErrorFix = 0
+;M501

@@ -97,3 +97,24 @@ M591 D1 P1 C"e1stop" S1										; Regular filament sensor for E1
 
 ; Automatic power saving____________________________________________
 M911 S22.5 R29.0 P"M913 X0 Y0 G91 M83 G1 Z3 E-5 F1000"  	; Set voltage thresholds and actions to run on power loss. Power Failure Pause
+
+; Primary hotend Clog detector__________________________________________________
+;M591 D0 P7 C"e0stop" S1 L4.2 E10 R10:1000					; Clog Detector E0 [Add-On]
+
+;Secondary hotend Clog detector__________________________________________________
+;M591 D1 P7 C"e1stop" S1 L4.2 E10 R10:1000					; Clog Detector E1 [Add-On]
+
+; Crash detector__________________________________________________
+;M950 J2 C"zstop" 											; create Input Pin 2 on Z-endstop to for M581 Command.
+;M581 P2 T0 S0 R0											; Crash Detector   [Add-On]
+
+; Emergency stop button__________________________________________________
+;M950 J3 C"exp.e6stop" 										; create Input Pin 2 on pin E6 to for M581 Command.
+;M581 P3 T0 S1 R0 											; Emergency stop [Add-On]
+;M581 P3 T1 S1 R1											; Emergency stop, pause the print [Add-On]
+;M581 P3 T1 S1 R0 											; Emergency stop, pause always [Add-On]
+
+; Automatic Z Offset Calibration____________________________________
+;global ErrorFix = 0
+;M501
+
