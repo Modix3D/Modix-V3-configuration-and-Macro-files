@@ -4,13 +4,27 @@ We are updating the naming scheme for the firmware updates. The naming scheme wi
 
 For example:
 
-Version 3.3 Config B
+Version 3.4.1 Config A
 
-This is compatible with RepRapFimware 3.3, and it's the second update to the configuration files (Config B).
+This is compatible with RepRapFimware 3.4.1, and it's the first update to the configuration files (Config A).
 
-If an update to RepRapFirmware happens, and the configuration files have been updated to work with the new RRF update, this will be Version 3.4 Config A for the first release.
+If an update to RepRapFirmware happens, and the configuration files have been updated to work with the new RRF update, this will be Version 3.5.0 Config A for the first release.
 
-Config B update notes:
+
+3.4.1 Config A update notes
+
+- Updated the filament-error.g to now only display a message, then execute M25 to run pause.g
+- Removed some of the text from pause.g to prevent confusion regarding the source of the pause
+- Updated the positioning of the M376 in the config_probe.g file to not be at the end, making the Z-offset process a little bit clearer/easier
+
+3.3 Config C update notes:
+- Updated the filament change macro, there were some reports of the extruder gear spinning extremely quickly when using it.
+- Added a filament-error.g, which is required for compatibility with RRF3.4
+- A M25 is added at the end of the filament-error0.g and filament error1.g files. This does double up on the pause movements but should help with issues related to not being able to resume after pausing
+- Config.g is updated to contain the right interpotlation settings for the Z axis, reducing noise
+- Added the configuration changes required for all add-ons to the config.g as commented out sections to help with the update process.
+
+3.3 Config B update notes:
 
 Homing, tilt and bed calibration
 - Improved the homing and calibration files to properly load and unload the heightmap, and properly establish the Z=0 datum
