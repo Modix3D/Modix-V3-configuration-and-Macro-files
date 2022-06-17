@@ -6,10 +6,8 @@ G92 E0																						; Set E position to 0
 G91            																				; relative positioning
 
 if {(move.axes[2].machinePosition) < (move.axes[2].max - 10)} 								; check if there's sufficient space to raise head
-	M291 P{"Raising head to...  " ^ move.axes[2].machinePosition+5}  R"Raising head" S0 T3	; message
 	G1 Z+5 F3000 																			; move Z up a bit
 else
-	M291 P{"Cannot raise head- insufficient space  " ^ move.axes[2].machinePosition ^ " : " ^ (move.axes[2].max - 10) ^ "."} R"Raising head" S0 T3
 	G4 S3 																					; wait for popup to display
 
 G90																							; absolute moves
