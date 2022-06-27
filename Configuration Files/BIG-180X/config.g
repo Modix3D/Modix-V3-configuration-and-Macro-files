@@ -5,7 +5,6 @@
 ; General preferences_________________________________________________________
 G90															; send absolute coordinates...
 M83															; ...but relative extruder moves
-M111 S0														; Debug off
 M555 P2														; Set output to look like Marlin
 M575 P1 B57600 S1											; Set auxiliary serial port baud rate and require checksum (for PanelDue)
 
@@ -14,9 +13,6 @@ M550 P"Big 180X"												; set printer name
 ;M551 P"MODIX3D"											; Set password (optional)
 M552 S1														; enable network
 ;M552 P0.0.0.0												; Uncomment this command for using Duet Ethernet board
-M586 P0 S1													; enable HTTP
-M586 P1 S0													; disable FTP
-M586 P2 S0													; disable Telnet
 
 ; Drives_________________________________________________________________________
 ;Main board______________________________________________________________________
@@ -32,10 +28,10 @@ M569 P7 S0													; Physical drive 7 . Z2 (0,0)
 M569 P8 S0													; Physical drive 8 . Z3 (1800,0) 
 M569 P9 S0													; Physical drive 9 . Z4 (1800,600) 
 
-;Settings_________________________________________________________
 M584 X0:1 Y5 Z6:7:8:9 E3:4 P3								; Driver mapping
 M671 X-185:-185:1868:1868 Y668:-46:-46:668 S30    			; Anticlockwise 
-;___________________________________________________________________
+
+;Settings_________________________________________________________
 M350 X16 Y16 Z16 E16:16 I1									; Configure microstepping with interpolation
 M92 X100 Y100 Z2000 E418.5:418.5							; Set steps per mm
 M566 X360 Y360 Z120 E3600:3600 P1							; Set maximum instantaneous speed changes (mm/min)

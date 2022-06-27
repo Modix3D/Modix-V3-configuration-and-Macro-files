@@ -5,7 +5,6 @@
 ; General preferences_________________________________________________________
 G90                                             			; send absolute coordinates...
 M83                                             			; ...but relative extruder moves
-M111 S0 													; Debug off
 M555 P2 													; Set output to look like Marlin
 M575 P1 B57600 S1											; Set auxiliary serial port baud rate and require checksum (for PanelDue)
 
@@ -15,9 +14,6 @@ M550 P"Big 60 V2 to V3"                      				; set printer name
 ;M551 P"MODIX3D"               								; Set password (optional)
 M552 S1                                        				; enable network
 ;M552 P0.0.0.0												; Uncomment this command for using Duet Ethernet board
-M586 P0 S1                                      			; enable HTTP
-M586 P1 S0                                      			; disable FTP
-M586 P2 S0                                      			; disable Telnet
 
 ; Drives_________________________________________________________________________
 M569 P0 S1                                            		; Physical drive 0 goes forwards. X-Axis.
@@ -26,10 +22,9 @@ M569 P2 S0                                                  ; Physical drive 2 g
 M569 P3 S1                                                  ; Physical drive 3 goes forwards. E0-Extruder.
 M569 P4 S0                                                  ; Physical drive 4 goes backwards. E1-Extruder.
 
-;Settings_________________________________________________________
 M584 X0 Y1 Z2 E3:4 P3										; Driver mapping
 
-;___________________________________________________________________
+;Settings_________________________________________________________
 M350 X16 Y16 Z16 E16:16 I1									; Configure microstepping with interpolation
 M92 X100 Y100 Z2000 E418.5:418.5							; Set steps per mm
 M566 X360 Y360 Z120 E3600:3600 P1							; Set maximum instantaneous speed changes (mm/min)
@@ -49,7 +44,6 @@ M574 X1 S1 P"xstop"                            				; configure switch-type (e.g.
 M574 Y2 S1 P"ystop"                            				; configure switch-type (e.g. microswitch) endstop for low end on Y via pin ystop
 
 ; Z-Probe
-
 M98 P"config_probe.g"
 M557 X-12:586 Y-17:581 P10:10   							; define mesh grid
 ; The Z_offset value is now set in config_probe.g, not in config.g
