@@ -9,9 +9,8 @@ M111 S0 													; Debug off
 M555 P2 													; Set output to look like Marlin
 M575 P1 B57600 S1											; Set auxiliary serial port baud rate and require checksum (for PanelDue)
 
-
 ; Network_____________________________________________________________________
-M550 P"Big 40"                      				; set printer name
+M550 P"Big 40"                      						; set printer name
 ;M551 P"MODIX3D"               								; Set password (optional)
 M552 S1                                        				; enable network
 ;M552 P0.0.0.0												; Uncomment this command for using Duet Ethernet board
@@ -40,7 +39,6 @@ M906 X1800 Y1800 E1000:1000 I50								; Set motor currents (mA) and motor idle 
 M906 Z2400 I50												; set Z motor currents
 M84 S100													; Set idle timeout - 100 seconds
 
-
 ; Axis Limits
 M208 X0 Y0 Z-3 S1                               			; set axis minima
 M208 X400 Y400 Z800 S0                          			; set axis maxima
@@ -50,26 +48,30 @@ M574 X1 S1 P"xstop"                            				; configure switch-type (e.g.
 M574 Y2 S1 P"ystop"                            				; configure switch-type (e.g. microswitch) endstop for low end on Y via pin ystop
 
 ; Z-Probe
-
+M558 P9 C"zprobe.in" H5 F120 T6000 A1 R0.7					; BLTouch probing settings
+M950 S0 C"exp.heater3"										; set probe pin
+M376 H50			                						; Height (mm) over which to taper off the bed compensation
+G31 P500 X-25.5 Y26.9                         				; BLTouch X and Y offset from nozzle
 M98 P"config_probe.g"
-M557 X-13:385 Y22:420 P8:8   								; define mesh grid
+M557 X-24.5:373.5 Y27.9:425.9 P8:8   						; define mesh grid
 ; The Z_offset value is now set in config_probe.g, not in config.g
 ; Adjust the values there, do not adjust anything here.
 
 ; Heaters___________________________________________________________
 M140 H-1                                       				; disable heated bed (overrides default heater mapping)
 
-M308 S0 P"e0temp" Y"thermistor" T100000 B4725   			; configure sensor 0 as thermistor on pin e0temp
+;E0________________________________________________________________
+;M308 S0 P"e0temp" Y"thermistor" T100000 B4725   			; configure sensor 0 as thermistor on pin e0temp
 ;M308 S0 P"spi.cs1" Y"rtd-max31865"							; Configure sensor 0 as PT100 via the daughterboard
-;M308 S0 P"e0temp" Y"pt1000"								; Configure sensor 0 as PT1000 on pin e0temp
+M308 S0 P"e0temp" Y"pt1000"								; Configure sensor 0 as PT1000 on pin e0temp
 M950 H0 C"e0heat" T0                            			; create nozzle heater output on e0heat and map it to sensor 0
 ;M307 H0 B0 S1                               				; PID calibration
 M143 H0 S285                                    			; set temperature limit for heater 0 to 285C
 
 ;E1_________________________________________________________________
-M308 S1 P"e1temp" Y"thermistor" T100000 B4725   			; configure sensor 1 as thermistor on pin e1temp
+;M308 S1 P"e1temp" Y"thermistor" T100000 B4725   			; configure sensor 1 as thermistor on pin e1temp
 ;M308 S1 P"spi.cs2" Y"rtd-max31865"							; Configure sensor 1 as PT100 via the daughterboard
-;M308 S1 P"e1temp" Y"pt1000"								; Configure sensor 0 as PT1000 on pin e0temp
+M308 S1 P"e1temp" Y"pt1000"								; Configure sensor 0 as PT1000 on pin e0temp
 M950 H1 C"e1heat" T1                            			; create nozzle heater output on e1heat and map it to sensor 1
 ;M307 H1 B0 S1                               				; PID calibration
 M143 H1 S285                                    			; set temperature limit for heater 1 to 285C
@@ -119,5 +121,6 @@ M591 D1 P1 C"e1stop" S1										; Regular filament sensor for E1
 ;M581 P3 T1 S1 R0 											; Emergency stop, pause always [Add-On]
 
 ; Automatic Z Offset Calibration____________________________________
-;global ErrorFix = 0
+M574 Z1 S1 P"!connlcd.enca" 								; configure switch-type for Automatic z-offset
+global errorfix = 0											; Z-offset calibration fixed offset
 ;M501
