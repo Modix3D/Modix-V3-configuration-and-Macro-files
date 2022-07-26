@@ -12,14 +12,14 @@ G30                          										; do single probe which sets Z to trigger
 while true
 
 ; run leveling pass
-	M280 P0 S60 I1													; clear any probe errors
-	G30 P0 X{move.axes[0].min-12} Y{move.axes[1].min+23} Z-99999	; Probe near front left leadscrew
-	M280 P0 S60 I1													; clear any probe errors
-	G30 P1 X{move.axes[0].max-16} Y{move.axes[1].min+23} Z-99999	; Probe near front right leadscrew
-	M280 P0 S60 I1													; clear any probe errors
-	G30 P2 X{move.axes[0].max-16} Y{move.axes[1].max+19} Z-99999	; Probe near rear right leadscrew
-	M280 P0 S60 I1													; clear any probe errors
-	G30 P3 X{move.axes[0].min-12} Y{move.axes[1].max+19} Z-99999 S4	; Probe near rear right leadscrew
+	M280 P0 S60 I1														; clear any probe errors
+	G30 P0 X{move.axes[0].min-24.5} Y{move.axes[1].min+27.9} Z-99999	; Probe near front left leadscrew
+	M280 P0 S60 I1														; clear any probe errors
+	G30 P1 X{move.axes[0].max-26.5} Y{move.axes[1].min+27.9} Z-99999	; Probe near front right leadscrew
+	M280 P0 S60 I1														; clear any probe errors
+	G30 P2 X{move.axes[0].max-26.5} Y{move.axes[1].max+25.9} Z-99999	; Probe near rear right leadscrew
+	M280 P0 S60 I1														; clear any probe errors
+	G30 P3 X{move.axes[0].min-24.5} Y{move.axes[1].max+25.9} Z-99999 S4	; Probe near rear right leadscrew
 
 	if move.calibration.initial.deviation < 0.02
 		break
