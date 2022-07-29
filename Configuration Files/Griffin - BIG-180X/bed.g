@@ -1,33 +1,91 @@
-M98 P"config_probe.g"   											; insure probe is using most recent configuration values
-G28 																; home all
-G29 S2                       										; cancel mesh bed compensation
-M290 R0 S0                   										; cancel baby stepping
+M291 S3 R"Tilt calibration" P"Press OK to continue, or CANCEL to abort"
 
-G90                          										; absolute moves
-G1 Z5 F99999                 										; insure Z starting position is high enough to avoid probing errors
-G1 X{move.axes[0].min+2} Y{move.axes[1].min+2} F6000 				; move to front left
-G30                          										; do single probe which sets Z to trigger height of Z probe
+M98 P"config_probe.g"   		; insure probe is using most recent configuration values
 
-; --- level bed ---
-while true
+G28 			; home all
+G29 S2			; cancel mesh bed compensation
+M290 R0 S0		; cancel baby stepping
 
-; run leveling pass
-	M280 P0 S60 I1														; clear any probe errors
-	G30 P0 X{move.axes[0].min-24.5} Y{move.axes[1].min+27.9} Z-99999	; Probe near front left leadscrew
-	M280 P0 S60 I1														; clear any probe errors
-	G30 P1 X{move.axes[0].max-26.5} Y{move.axes[1].min+27.9} Z-99999	; Probe near front right leadscrew
-	M280 P0 S60 I1														; clear any probe errors
-	G30 P2 X{move.axes[0].max-26.5} Y{move.axes[1].max+25.9} Z-99999	; Probe near rear right leadscrew
-	M280 P0 S60 I1														; clear any probe errors
-	G30 P3 X{move.axes[0].min-24.5} Y{move.axes[1].max+25.9} Z-99999 S4	; Probe near rear right leadscrew
+G90				; absolute moves
+G1 Z5 F99999	; insure Z starting position is high enough to avoid probing errors
+G1 X{(move.axes[0].max-move.axes[0].min)/2} Y{(move.axes[1].max-move.axes[1].min)/2} F6000 	; move probe to center of bed
+G30 			; do single probe which sets Z to trigger height of Z probe
 
-	if move.calibration.initial.deviation < 0.02
-		break
-	; check pass limit - abort if pass limit reached
-	if iterations = 10
-		M291 P"Bed Leveling Aborted" R"Pass Limit Reached"
-		abort "Bed Leveling Aborted - Pass Limit Reached"
+M564 H0 S0      ; movements outside print area are allowed
 
-G1 X{move.axes[0].min+2} Y{move.axes[1].min+2} F6000 				; move to front left
-G30																	; do single probe which sets Z to trigger height of Z probe
-echo "Your bed is within 0.02 mm between the corners. The difference was " ^ move.calibration.initial.deviation ^ "mm. You can proceed to print"
+G91 			; relative moves
+G1 Z10 F200		; Raise nozzle 10mm
+G90 			; absolute movements
+M300 S666 P666 	; beep
+
+M291 S2 R"Centre reference point" P"Place a bracket under the nozzle and adjust the Z height until slight friction can be noticed" Z1 
+
+M300 S666 P666 	; beep
+M291 S2 R"Please remove the bracket" P"Press OK only after the bracket has been removed" 
+
+G91 			; relative moves
+G1 Z10 F200		; Raise nozzle 10mm
+G90 			; absolute movements
+M300 S666 P666 	; beep
+ 
+G1 X{move.axes[0].min+2} Y{move.axes[1].min+2} F6000 ; Front left
+
+G91 			; relative moves
+G1 Z-10 F200	; lower nozzle 10mm
+G90 			; absolute movements
+M18 Z 			; disable Z stepper motors
+
+M291 S2 R"Front-Left corner" P"Place the bracket and adjust the Z height by manually rotating the ball screw until slight friction can be noticed" ; 
+M300 S666 P666 ; beep
+M291 S2 R"Please remove the bracket" P"Press OK only after the bracket has been removed"  ;
+
+G91 			; relative moves
+G1 Z10 F200		; Raise nozzle 10mm
+G90 			; absolute movements
+M300 S666 P666 	; beep
+
+G1 X{move.axes[0].max-2} Y{move.axes[1].min+2} F6000 ; Front right
+
+G91 			; relative moves
+G1 Z-10 F200	; lower nozzle 10mm
+G90 			; absolute movements
+M18 Z 			; disable Z stepper motors
+
+M291 S2 R"Front-Right corner" P"Place the bracket and adjust the Z height by manually rotating the ball screw until slight friction can be noticed" ;
+M300 S666 P666 ; 
+M291 S2 R"Please remove the bracket" P"Press OK only after the bracket has been removed"  ;
+
+G91 			; relative moves
+G1 Z10 F200		; Raise nozzle 10mm
+G90 			; absolute movements
+M300 S666 P666 	; beep
+G1 X{move.axes[0].max-2} Y{move.axes[1].max-2} F6000 ; rear right
+
+G91 			; relative moves
+G1 Z-10 F200	; lower nozzle 10mm
+G90 			; absolute movements
+M18 Z 			; disable Z stepper motors
+
+M291 S2 R"Rear-Right corner" P"Place the bracket and adjust the Z height by manually rotating the ball screw until slight friction can be noticed" ; 
+M300 S666 P666 ; 
+M291 S2 R"Please remove the bracket" P"Press OK only after the bracket has been removed"  ;
+
+G91 			; relative moves
+G1 Z10 F200		; Raise nozzle 10mm
+G90 			; absolute movements
+M300 S666 P666 	; beep
+G1 X{move.axes[0].min+2} Y{move.axes[1].max-2} F6000 ; rear right
+
+G91 			; relative moves
+G1 Z-10 F200	; lower nozzle 10mm
+G90 			; absolute movements
+M18 Z 			; disable Z stepper motors
+
+M291 S2 R"Rear-Left" P"Place the bracket and adjust the Z height by manually rotating the ball screw until slight friction can be noticed" ;
+
+
+M300 S666 P666 	; beep
+M291 S2 R"Please remove the bracket" P"Press OK only after the bracket has been removed"  
+M300 S666 P666 	; beep
+M564 S1 H1     	; Negative movements are forbidden
+M291 S2 R"Tilt calibration has been completed" P"You may proceed to the next step"
