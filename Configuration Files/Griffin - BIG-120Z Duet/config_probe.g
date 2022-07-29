@@ -1,0 +1,1 @@
+G31 Z-3												; set Z probe trigger value and Z-offset

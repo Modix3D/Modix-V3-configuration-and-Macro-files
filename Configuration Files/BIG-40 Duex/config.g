@@ -5,6 +5,7 @@
 ; General preferences_________________________________________________________
 G90															; send absolute coordinates...
 M83															; ...but relative extruder moves
+M111 S0														; Debug off
 M555 P2														; Set output to look like Marlin
 M575 P1 B57600 S1											; Set auxiliary serial port baud rate and require checksum (for PanelDue)
 
@@ -13,6 +14,9 @@ M550 P"Big 40"												; set printer name
 ;M551 P"MODIX3D"											; Set password (optional)
 M552 S1														; enable network
 ;M552 P0.0.0.0												; Uncomment this command for using Duet Ethernet board
+M586 P0 S1													; enable HTTP
+M586 P1 S0													; disable FTP
+M586 P2 S0													; disable Telnet
 
 ; Drives_________________________________________________________________________
 ;Main board______________________________________________________________________
@@ -28,10 +32,10 @@ M569 P7 S0													; Physical drive 7 . Z2 (0,0)
 M569 P8 S0													; Physical drive 8 . Z3 (400,0) 
 M569 P9 S0													; Physical drive 9 . Z4 (400,400) 
 
+;Settings_________________________________________________________
 M584 X0:1 Y5 Z6:7:8:9 E3:4 P3								; Driver mapping
 M671 X-185:-185:468:468 Y468:-46:-46:468 S30    			; Anticlockwise 
-
-;Settings_________________________________________________________
+;___________________________________________________________________
 M350 X16 Y16 Z16 E16:16 I1									; Configure microstepping with interpolation
 M92 X100 Y100 Z2000 E418.5:418.5							; Set steps per mm
 M566 X360 Y360 Z120 E3600:3600 P1							; Set maximum instantaneous speed changes (mm/min)
@@ -42,22 +46,22 @@ M906 X1800 Y1800 E1000:1000 I50								; Set motor currents (mA) and motor idle 
 M906 Z1800 I50												; set Z motor currents
 M84 S100													; Set idle timeout - 100 seconds
 
-; Axis Limits_________________________________________________________________________
+; Axis Limits
 M208 X0 Y0 Z-2 S1                               			; set axis minima
 M208 X400 Y400 Z800 S0                          			; set axis maxima
 
-; Endstops_________________________________________________________________________
+; Endstops
 M574 X1 S1 P"xstop + e0stop"                            	; configure switch-type (e.g. microswitch) endstop for low end on X via pin xstop
 M574 Y2 S1 P"ystop"                            				; configure switch-type (e.g. microswitch) endstop for low end on Y via pin ystop
 
-; Z-Probe_________________________________________________________________________
+; Z-Probe
+
 M98 P"config_probe.g"
 M557 X-13:385 Y22:420 P8:8									; define mesh grid
 ; The Z_offset value is now set in config_probe.g, not in config.g
 ; Adjust the values there, do not adjust anything here.
 
-; Heaters_________________________________________________________________________
-; bed_________________________________________________________________________
+; Heaters___________________________________________________________
 M140 H-1                                       				; disable heated bed (overrides default heater mapping)
 
 ;E0_________________________________________________________________
