@@ -10,6 +10,13 @@ This is compatible with RepRapFimware 3.4.1, and it's the first update to the co
 
 If an update to RepRapFirmware happens, and the configuration files have been updated to work with the new RRF update, this will be Version 3.5.0 Config A for the first release.
 
+**3.4.1 Config C update notes** 
+
+-
+
+**3.4.1 Config B update notes**
+
+- Added Griffin specific variants to the configuration files
 
 **3.4.1 Config A update notes**
 
