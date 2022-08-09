@@ -24,6 +24,7 @@ M291 S2 R"Test Z Probe Trigger Height - Step 1" P"Place a paper sheet under the 
 G92 Z0						; the nozzle should now be just touching the bed so set the logical Z position to match the physical Z position
 M300 S666 P666				; beep
 G1 Z8 F300					; insure Z position will allow for probing
+G1 X{move.axes[0].machinePosition - sensors.probes[0].offsets[0]} Y{move.axes[1].machinePosition - sensors.probes[0].offsets[1]} F1500
 G4 P0						; wait for the movement to stop
 
 M291 S2 R"Test Z Probe Trigger Height - Step 2" P"Please remove the paper sheet and wait for the bed-probing to begin" ;
