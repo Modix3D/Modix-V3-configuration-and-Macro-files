@@ -35,7 +35,6 @@ echo >"0:/sys/config_probe.g" "G31 Z"^{var.Z_auto_offset}				; write the Z-offse
 
 echo "the Z-offset has been stored in the config_probe.g file. The Z-offset is", var.Z_auto_offset, "mm"
 
-
 G4 P0						; wait for the movement to stop
 G91							; relative movements
 G1 Z10 F300					; Lift up the nozzle again so it's not pressed against the bed surface

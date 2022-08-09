@@ -3,10 +3,10 @@
 
 var errorfix = 0.000  		; constant offset
 
-;M291 S3 R"Heating up nozzle" P"Wait for the nozzle to reach printing temperatures"
-;M568 P0 S215				; set tool 0 (primary hotend) temperature to 215c
+M291 S3 R"Heating up nozzle" P"Wait for the nozzle to reach printing temperatures"
+M568 P0 S215				; set tool 0 (primary hotend) temperature to 215c
 T0							; select tool 0 (primary hotend)
-;M116 P0 H5					; wait for temperature to reach within 5c of set temperature
+M116 P0 H5					; wait for temperature to reach within 5c of set temperature
 
 M300 S666 P666 				; beep
 M291 S3 R"Automatic Z Offset Calibration" P"Press OK to continue, or CANCEL to abort"
