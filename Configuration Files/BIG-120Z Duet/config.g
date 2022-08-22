@@ -46,9 +46,10 @@ M574 Y2 S1 P"ystop"                            				; configure switch-type (e.g.
 ; Z-Probe
 M558 P9 C"zprobe.in" H5 F120 T6000 A1 R0.7					; BLTouch probing settings
 M950 S0 C"exp.heater3"										; set probe pin
-M376 H50			                						; Height (mm) over which to taper off the bed compensation
-M557 X-13:585 Y22:620 P10:10   								; define mesh grid
+M376 H100			                						; Height (mm) over which to taper off the bed compensation
 G31 P500 X-14 Y21                         					; BLTouch X and Y offset from nozzle
+M557 X{move.axes[0].min + sensors.probes[0].offsets[0] + 1, move.axes[0].max + sensors.probes[0].offsets[0] - 1} Y{move.axes[1].min + sensors.probes[0].offsets[1] + 1, move.axes[1].max + sensors.probes[0].offsets[1] - 1} P10:10
+; The M557 is used to define the mesh grid area. It uses the P parameter to set the amount of probing points. P10:10 would be a 10x10 grid. Supports up to a 21x21 grid. 
 M98 P"config_probe.g"										; Load the Z-offset from the config_probe.g file
 ; The Z_offset value is now set in config_probe.g, not in config.g
 ; Adjust the values there, do not adjust anything here.

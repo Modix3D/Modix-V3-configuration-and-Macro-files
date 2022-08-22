@@ -44,7 +44,7 @@ M84 S100													; Set idle timeout - 100 seconds
 
 ; Axis Limits
 M208 X0 Y0 Z-2 S1                               			; set axis minima
-M208 X1001 Y1001 Z1000 S0                          			; set axis maxima
+M208 X1000 Y1000 Z1000 S0                          			; set axis maxima
 
 ; Endstops
 M574 X1 S1 P"xstop + e0stop"                            	; configure switch-type (e.g. microswitch) endstop for low end on X via pin xstop
@@ -54,8 +54,9 @@ M574 Y2 S1 P"ystop"                            				; configure switch-type (e.g.
 M558 P9 C"zprobe.in" H5 F120 T6000 A1 R0.7					; BLTouch probing settings
 M950 S0 C"duex.pwm5"										; sets the BLTouch probe
 M376 H100			                						; Height (mm) over which to taper off the bed compensation
-M557 X-24.5:973.5 Y27.9:1025.9 P15:15						; define mesh grid
 G31 P500 X-25.5 Y26.9										; BLTouch X and Y offset
+M557 X{move.axes[0].min + sensors.probes[0].offsets[0] + 1, move.axes[0].max + sensors.probes[0].offsets[0] - 1} Y{move.axes[1].min + sensors.probes[0].offsets[1] + 1, move.axes[1].max + sensors.probes[0].offsets[1] - 1} P15:15
+; The M557 is used to define the mesh grid area. It uses the P parameter to set the amount of probing points. P10:10 would be a 10x10 grid. Supports up to a 21x21 grid. 
 M98 P"config_probe.g"										; Load the Z-offset from the config_probe.g file
 ; The Z_offset value is now set in config_probe.g, not in config.g
 ; Adjust the values there, do not adjust anything here.

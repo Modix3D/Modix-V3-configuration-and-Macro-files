@@ -9,7 +9,7 @@ M555 P2 													; Set output to look like Marlin
 M575 P1 B57600 S1											; Set auxiliary serial port baud rate and require checksum (for PanelDue)
 
 ; Network_____________________________________________________________________
-M550 P"Big 40"                      				; set printer name
+M550 P"Big 40"                      						; set printer name
 ;M551 P"MODIX3D"               								; Set password (optional)
 M552 S1                                        				; enable network
 ;M552 P0.0.0.0												; Uncomment this command for using Duet Ethernet board
@@ -35,7 +35,6 @@ M906 X1800 Y1800 E1000:1000 I50								; Set motor currents (mA) and motor idle 
 M906 Z2400 I50												; set Z motor currents
 M84 S100													; Set idle timeout - 100 seconds
 
-
 ; Axis Limits
 M208 X0 Y0 Z-3 S1                               			; set axis minima
 M208 X400 Y400 Z800 S0                          			; set axis maxima
@@ -47,9 +46,10 @@ M574 Y2 S1 P"ystop"                            				; configure switch-type (e.g.
 ; Z-Probe
 M558 P9 C"zprobe.in" H5 F120 T6000 A1 R0.7					; BLTouch probing settings
 M950 S0 C"exp.heater3"										; set probe pin
-M376 H50			                						; Height (mm) over which to taper off the bed compensation
+M376 H100			                						; Height (mm) over which to taper off the bed compensation
 G31 P500 X-14 Y21                         					; BLTouch X and Y offset from nozzle
-M557 X-13:385 Y22:420 P8:8   								; define mesh grid
+M557 X{move.axes[0].min + sensors.probes[0].offsets[0] + 1, move.axes[0].max + sensors.probes[0].offsets[0] - 1} Y{move.axes[1].min + sensors.probes[0].offsets[1] + 1, move.axes[1].max + sensors.probes[0].offsets[1] - 1} P8:8
+; The M557 is used to define the mesh grid area. It uses the P parameter to set the amount of probing points. P10:10 would be a 10x10 grid. Supports up to a 21x21 grid. 
 M98 P"config_probe.g"										; Load the Z-offset from the config_probe.g file
 ; The Z_offset value is now set in config_probe.g, not in config.g
 ; Adjust the values there, do not adjust anything here.
