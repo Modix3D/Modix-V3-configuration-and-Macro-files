@@ -15,7 +15,7 @@ If an update to RepRapFirmware happens, and the configuration files have been up
 - Adjusted the bed.g to work for all duex enabled printers in the same fashion, no longer requiring the BLTouch X/Y offset, but rather going off the max movement area of the nozzle.
 - Cleaned up the configuration files
 - Moved some data from the config_probe.g file back to config.g file. The config_probe.g now only contains the Z-offset data.
-- Added a new macro file that moves the bed down by 50mm, even when not homed.
+- Added a new macro file that allows you to move the bed down by 50mm even when not homed.
 
 **3.4.1 Config B update notes**
 
