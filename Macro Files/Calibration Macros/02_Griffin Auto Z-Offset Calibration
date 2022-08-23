@@ -29,9 +29,10 @@ G92 Z0 						; set current position as Z=0
 G4 P200 					; wait 200ms
 G1 Z11						; move up 11mm
 
-G1 X{move.axes[0].machinePosition - sensors.probes[0].offsets[0]} Y{move.axes[1].machinePosition - sensors.probes[0].offsets[1]} F1500	; move nozzle so that BLTouch is in it's position 
+G91							; relative moves
+G1 X{sensors.probes[0].offsets[0] * -1} Y{sensors.probes[0].offsets[1] * -1} F1500 ; move nozzle so that BLTouch is in it's position 
+G90							; absolute moves
 
-G90							; absolute movements
 G30 S-3 					; probes Z and adjusts the probe trigger height to match the actual stop height.
 G4 P200 					; wait 200ms
 G91							; relative movement
@@ -39,9 +40,10 @@ G91							; relative movement
 var Z_auto_offset = {sensors.probes[0].triggerHeight+var.errorfix} ; math to calculate the BLTouch offset
 echo >"0:/sys/config_probe.g" "G31 Z"^{var.Z_auto_offset}
 
+echo "the Z-offset has been stored in the config_probe.g file. The Z-offset is", var.Z_auto_offset, "mm. Remove the offset tool and place it back in the box"
+
 M564 S1 H1      			; Negative movements are forbidden
 M300 S666 P666 				; beep
-M291 S3 R"Auto Z Offset Calibration is Done!" P"Remove the offset tool and place it back in the the box"
 	
 M568 P0 S0					; set tool 0 temperatures to 0
 T-1							; deselect all tools
