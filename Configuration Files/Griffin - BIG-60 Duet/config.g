@@ -118,5 +118,5 @@ M911 S22.5 R29.0 P"M913 X0 Y0 G91 M83 G1 Z3 E-5 F1000"  	; Set voltage threshold
 ;M581 P3 T1 S1 R0 											; Emergency stop, pause always [Add-On]
 
 ; Automatic Z Offset Calibration____________________________________
-M574 Z1 S1 P"!connlcd.enca" 								; configure switch-type for Automatic z-offset
+M574 Z1 S1 P"^!connlcd.enca" 								; configure switch-type for Automatic z-offset
 ;M501

@@ -118,5 +118,5 @@ M591 D1 P1 C"e1stop" S1										; Regular filament sensor for E1
 ;M581 P3 T1 S1 R0 											; Emergency stop, pause always [Add-On]
 
 ; Automatic Z Offset Calibration____________________________________
-M574 Z1 S1 P"!connlcd.enca" 								; configure switch-type for Automatic z-offset
+M574 Z1 S1 P"^!connlcd.enca" 								; configure switch-type for Automatic z-offset
 ;M501
