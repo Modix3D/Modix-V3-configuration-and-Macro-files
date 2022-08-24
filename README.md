@@ -10,6 +10,13 @@ This is compatible with RepRapFimware 3.4.1, and it's the first update to the co
 
 If an update to RepRapFirmware happens, and the configuration files have been updated to work with the new RRF update, this will be Version 3.5.0 Config A for the first release.
 
+
+**3.4.1 Config D update notes** 
+
+- Fixed a bug with the Griffin auto-Z probe for the Duet enabled printers
+- Updated the tilt calibration process to better work with the Griffin
+- the Z-offset and PID macro's now automatically write their results of their calibration processes to config_probe.g and PID_tune_E0.g or PID_tune_E1.g, no longer requiring you to edit those files manually.
+
 **3.4.1 Config C update notes** 
 
 - Adjusted the bed.g to work for all duex enabled printers in the same fashion, no longer requiring the BLTouch X/Y offset, but rather going off the max movement area of the nozzle.
