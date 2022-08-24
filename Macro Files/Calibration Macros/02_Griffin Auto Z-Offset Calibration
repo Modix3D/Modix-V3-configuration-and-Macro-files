@@ -16,7 +16,7 @@ M564 H1 S0             		; Negative movements are allowed
 G29 S2						; cancel mesh bed compensation
 G90 						; absolute positioning
 G1 Z35						; raise Z to 35mm
-G1 X100 Y100 F6000			; go to X100, Y100
+G1 X100 Y200 F6000			; go to X100, Y200
 G4 P0						; wait for movements to have stopped
 
 M300 S666 P666				; beep
