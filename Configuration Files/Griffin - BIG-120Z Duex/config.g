@@ -20,7 +20,7 @@ M569 P0 S0													; Physical drive 0 . X1
 M569 P1 S1													; Physical drive 1 . X2
 M569 P2 R-1													; Physical drive 2 . Canceled
 M569 P3 S0                                                  ; Physical drive 3 goes backwards. E0-Extruder.
-M569 P4 S1                                                  ; Physical drive 4 goes forwards. E1-Extruder.
+M569 P4 S0                                                  ; Physical drive 4 goes forwards. E1-Extruder.
 ;Duex5 board_____________________________________________________________________
 M569 P5 S0													; Physical drive 5 . Y
 M569 P6 S0													; Physical drive 6 . Z1 (0,600) 
