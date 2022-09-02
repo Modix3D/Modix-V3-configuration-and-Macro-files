@@ -57,6 +57,7 @@ M98 P"config_probe.g"										; Load the Z-offset from the config_probe.g file
 ; Heaters___________________________________________________________
 M140 H-1                                       				; disable heated bed (overrides default heater mapping)
 
+;E0_________________________________________________________________
 M308 S0 P"e0temp" Y"thermistor" T100000 B4725   			; configure sensor 0 as thermistor on pin e0temp
 ;M308 S0 P"spi.cs1" Y"rtd-max31865"							; Configure sensor 0 as PT100 via the daughterboard
 ;M308 S0 P"e0temp" Y"pt1000"								; Configure sensor 0 as PT1000 on pin e0temp
