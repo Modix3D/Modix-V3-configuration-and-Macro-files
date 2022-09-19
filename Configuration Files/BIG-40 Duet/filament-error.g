@@ -6,7 +6,7 @@ if {param.D ^ ""} = "0"
 		echo "No data received on E0 Continuing to Print - Check configuration and wiring"
 		M99
 	echo "No filament or possible clog on E0 - Paused"
-	M291 p"Filament Sensor 0 - No filament or movement error" S1
+	M291 p"Filament Sensor 0 - No filament or movement error" S1 T0
 	M25 ;pause the print
 
 if {param.D ^ ""} = "1"
@@ -17,6 +17,6 @@ if {param.D ^ ""} = "1"
 		echo "No data received on E1 Continuing to Print - Check configuration and wiring"
 		M99
 	echo "No filament or possible clog on E1"
-	M291 p"Filament Sensor 1 - No filament or movement error" S1
+	M291 p"Filament Sensor 1 - No filament or movement error" S1 T0
 	M25 ;pause the print
 M99
