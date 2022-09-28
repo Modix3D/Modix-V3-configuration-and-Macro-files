@@ -64,6 +64,7 @@ M140 H-1                                       				; disable heated bed (overrid
 M308 S0 P"e0temp" Y"pt1000"									; Configure sensor 0 as PT1000 on pin e0temp
 M950 H0 C"e0heat" T0                            			; create nozzle heater output on e0heat and map it to sensor 0
 M98 P"PID_tune_E0.g" R1										; PID calibration
+; M307 is not used in this config. The M307 files are stored and executed from the PID_tune_E0.g file. You can verify the values there.
 M143 H0 S285                                    			; set temperature limit for heater 0 to 285C
 
 ;E1_________________________________________________________________
@@ -72,6 +73,7 @@ M143 H0 S285                                    			; set temperature limit for h
 M308 S1 P"e1temp" Y"pt1000"									; Configure sensor 1 as PT1000 on pin e1temp
 M950 H1 C"e1heat" T1                            			; create nozzle heater output on e1heat and map it to sensor 1
 M98 P"PID_tune_E1.g" R1										; PID calibration
+; M307 is not used in this config. The M307 files are stored and executed from the PID_tune_E1.g file. You can verify the values there.
 M143 H1 S285                                    			; set temperature limit for heater 1 to 285C
 
 
