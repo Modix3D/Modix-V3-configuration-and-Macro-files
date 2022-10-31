@@ -1,0 +1,3 @@
+echo "The firmware version is: RepRapFirmware", boards[0].firmwareVersion
+echo "The configuration file is:", global.config_version
+echo "The Macro file is: Version 3.4.2 Macro A"
