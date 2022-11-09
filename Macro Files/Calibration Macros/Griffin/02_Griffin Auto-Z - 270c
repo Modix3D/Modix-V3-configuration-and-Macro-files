@@ -8,9 +8,13 @@ M291 S3 R"Heating up nozzle" P"Wait for the nozzle to reach printing temperature
 M568 P0 S270				; set tool 0 (primary hotend) temperature to 270c
 T0							; select tool 0 (primary hotend)
 M116 P0 H5					; wait for temperature to reach within 5c of set temperature
+M83							; relative extruder moves
+G1 E-5 F300 				; retract 5mm of filament
+G4 P0						; wait for movements to have stopped
 
 M300 S666 P666 				; beep
 M291 S3 R"Automatic Z Offset Calibration" P"Press OK to continue, or CANCEL to abort"
+M291 S3 R"Homing axes" P"Remove the puck. The printer will home the X, Y, and Z axises without the puck"
 
 M98 P"config_probe.g"												; Load BLTouch probe settings
 M280 P0 S60 I1														; clear any probe errors

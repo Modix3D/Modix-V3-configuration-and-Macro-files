@@ -11,6 +11,7 @@ M116 P0 H5					; wait for temperature to reach within 5c of set temperature
 
 M300 S666 P666 				; beep
 M291 S3 R"Automatic Z Offset Calibration" P"Press OK to continue, or CANCEL to abort"
+M291 S3 R"Homing axes" P"Remove the puck. The printer will home the X, Y, and Z axises without the puck"
 
 M98 P"config_probe.g"												; Load BLTouch probe settings
 M280 P0 S60 I1														; clear any probe errors
@@ -32,7 +33,9 @@ M564 H1 S0             		; Negative movements are allowed
 G29 S2						; cancel mesh bed compensation
 G90 						; absolute positioning
 G1 Z35						; raise Z to 35mm
-G4 P0						; wait for movements to have stopped
+M83							; relative extruder moves
+G1 E-5 F300 				; retract 5mm of filament
+G4 P0						; wait for the moves to finish       
 M291 S3 R"Clean the nozzle" P"The nozzle has been pre-heated. Clean it from any plastic debris"
 G1 X100 Y200 F6000			; go to X100, Y200
 G4 P0						; wait for movements to have stopped
