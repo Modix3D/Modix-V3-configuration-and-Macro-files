@@ -13,6 +13,7 @@ M575 P1 B57600 S1											; Set auxiliary serial port baud rate and require ch
 
 ; Network_____________________________________________________________________
 M550 P"Big 40"                      						; set printer name
+;M551 P"MODIX3D"											; Set password (optional)
 M552 S1                                        				; enable network
 ;M552 P0.0.0.0												; Uncomment this command for using Duet Ethernet board
 
