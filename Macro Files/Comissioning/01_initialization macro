@@ -27,8 +27,8 @@ else
 	M291 S3 R"Control board verification!" P"See the guide for comparison pictures. Press Cancel if the board does not match"
 	echo "According to your configuration file, you have the Duet mainboard installed on your printer"
 
-M291 S2 R"Verify the bed height" P"According to the guide, check that the bed is positioned so that you have some space between the probe and bed, 10mm or more is recommended."
-M291 S2 R"Verify the bed height" P"If you do not have this space, check the guide on how to move the bed down"
+M291 S3 R"Verify the bed height" P"According to the guide, check that the bed is positioned so that you have some space between the probe and bed, 10mm or more is recommended."
+M291 S3 R"Verify the bed height" P"If you do not have this space, check the guide on how to move the bed down"
 M291 S3 R"Verify the bed height" P"Press CANCEL to abort if the bed is too high"
 
 M564 H0 S0			; Negative movements are allowed
@@ -38,27 +38,35 @@ M401 				; deploy  the BLTouch probe pin
 M291 S3 R"Attention!" P"Probe pin deployed. Verify the tip of the pin is lower than the nozzle. Press Cancel if it is too high"
 M402 				; retract the BLTouch probe pin
 
-
-
 M18 				; disable stepper motors
 M291 S3 R"Place the printhead near the middle" P"You want to make sure there is at least 150mm of space around the printhead"
+M291 S2 R"Move to the left" P"Check the troubleshooting if it moved to the right."
 G91					; relative movement
 G1 X-100 F1500		; move 100mm to the left
-M291 S3 R"Printhead moving to the left" P"Check the troubleshooting if it moved to the right."
+M291 S3 R"Printhead moved to the left" P"Check the troubleshooting if it moved to the right."
+M291 S2 R"Move to the front" P"Check the troubleshooting if it moved to the rear."
 
 G1 Y-100 F1500		; Move 100mm to the front
-M291 S3 R"Printhead moving to the front" P"Check the troubleshooting if it moved to the rear."
+M291 S3 R"Printhead moved to the front" P"Check the troubleshooting if it moved to the rear."
 
-M291 S3 R"Home and Move to the front left" P"The printer will home the X and Y axis, then move to the front left (X100, Y100)"
+M291 S3 R"Home and Move to the front left" P"The printer will home the X axis, and then the Y axis, then move to the front left (X100, Y100)"
+M291 S3 R"Home and Move to the front left" P"The X and Y axis motors have their power reduced to 50% of max power and run at reduced speeds"
 
-M913 X50 															; X axis 50% power
-G1 H2 Z5 F200          												; lift Z relative to current position
-G1 H1 X{(move.axes[0].max+5)*-1} Y{move.axes[1].max+5} F3000  		; move quickly to X and Y axis endstops and stop there (first pass)
-G1 H2 X5 Y-5 F600      												; go back a few mm
-G1 H1 X{(move.axes[0].max+5)*-1} Y{move.axes[1].max+5} F600  		; move slowly to X and Y axis endstops once more (second pass)
+M913 X50 															; X axis 40% power
+M913 Y50															; Y axis 40% power
+G1 H2 Z10 F200          											; lift Z relative to current position
+G1 H1 X{(move.axes[0].max+5)*-1} F1200  							; move quickly to X endstops and stop there (first pass)
+G1 H2 X5 F600      													; go back a few mm
+G1 H1 X{(move.axes[0].max+5)*-1} Y{move.axes[1].max+5} F300  		; move slowly to X axis endstops once more (second pass)
+G4 S1																; wait 1 second
+G1 H2 Y{move.axes[1].max+5} F1200									; move quickly to Y endstops and stop there (first pass)
+G1 H2 Y-5 F600      												; go back a few mm
+G1 H1 Y{move.axes[1].max+5} F300  									; move slowly to Y axis endstops once more (second pass)
 M913 X100 															; X axis 100% power
-G4 P0				; wait for movement to complete
+M913 Y100 															; Y axis 100% power
+G4 P0																; wait for movement to complete
 
+M291 S3 R"Move to the front left" P"The printhead will now move to the front left (X100, Y100)"
 G90					; absolute movements
 G1 X100 Y100 F2000	; move to the front left
 
@@ -66,6 +74,7 @@ M558 F10 T1000		; reduce probing speed significantly
 G4 P0				; wait for movement to complete
 M291 S2 R"BLTouch test" P"The BLTouch probe will deploy, and the bed will slowly move up. Using your hands, trigger the BLTouch probe and verify that the bed stops moving"
 M291 S2 R"BLTouch test" P"If the bed does not stop moving, immediatly shut the printer down!"
+M291 S2 R"BLTouch test" P"Press OK to start the bed probing"
 
 G30 S-1				; probe the bed
 M558 F120 T6000		; back to default settings
@@ -79,12 +88,13 @@ G90
 
 M291 S2 R"Bed placement verification" P"The printer will first then move to the X axis minimum, then to the X axis maximum"
 M291 S2 R"Bed placement verification" P"Verify that the BLTouch is posisioned above the bed in both cases"
-
+M291 S2 R"Bed placement verification" P"Press OK to move to the left"
 
 G1 X{move.axes[0].min+0.2} Y20 F3000	; move bed to the left side
 M300 S1111 P666 						; beep 
 G4 P0									; wait for movement to complete
 M291 S2 R"Left side" P"Verify that the BLTouch and nozzle are positioned above the bed. If they are not above the bed, adjust the bed." ;
+M291 S2 R"Bed placement verification" P"Press OK to move to the right"
 
 G1 X{move.axes[0].max-0.2} Y20 F3000	; move bed to the right side
 M300 S1111 P666 						; beep 
