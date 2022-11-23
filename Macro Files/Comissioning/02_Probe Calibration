@@ -6,13 +6,14 @@ G4 P300				; wait 300ms
 
 M564 H0 S0			; Negative movements are allowed
 G91 				; relative movement
-G1 Z5 F200			; lower bed by 5mm
+G1 Z10 F200			; lower bed by 5mm
 G90 				; absolute movement
 
 M401 				; deploy  the BLTouch probe pin
 M291 S3 R"Attention!" P"Probe pin deployed. Verify the tip of the pin is lower than the nozzle"
-
 M402 				; retract the BLTouch probe pin
+
+M291 S3 R"Home all!" P"Press OK to home the X, Y and Z axis"
 
 ; home all
 M98 P"config_probe.g"												; Load BLTouch probe settings
