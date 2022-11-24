@@ -99,17 +99,20 @@ M563 P1 S"E1 Secondary" D1 H1 F1                			; define tool 1
 G10 P1 X0 Y49 Z0                                			; set tool 1 axis offsets
 G10 P1 R0 S210                                    			; set initial tool 1 active and standby temperatures to 0C
 
+; Automatic power saving____________________________________________
+M911 S22.5 R29.0 P"M913 X0 Y0 G91 M83 G1 Z3 E-5 F1000"  	; Set voltage thresholds and actions to run on power loss. Power Failure Pause
+
 ; Filament sensor settings__________________________________________________
 M591 D0 P1 C"e0stop" S1										; Regular filament sensor for E0
 M591 D1 P1 C"e1stop" S1										; Regular filament sensor for E1
 
-; Automatic power saving____________________________________________
-M911 S22.5 R29.0 P"M913 X0 Y0 G91 M83 G1 Z3 E-5 F1000"  	; Set voltage thresholds and actions to run on power loss. Power Failure Pause
+; Add-on settings__________________________________________________
 
 ; Primary hotend Clog detector__________________________________________________
-;M591 D0 P7 C"e0stop" S1 L4.2 E10 R10:1000					; Clog Detector E0 [Add-On]
+;M591 D0 P7 C"e0stop" S1 L3.2 E10 R10:300					; Clog Detector E0 [Add-On]
 
 ;Secondary hotend Clog detector__________________________________________________
+;M591 D1 P7 C"e1stop" S1 L3.2 E10 R10:300					; Clog Detector E1 [Add-On]
 ;M591 D1 P7 C"e1stop" S1 L4.2 E10 R10:1000					; Clog Detector E1 [Add-On]
 
 ; Crash detector__________________________________________________

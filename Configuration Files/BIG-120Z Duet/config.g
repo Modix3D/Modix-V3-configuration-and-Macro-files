@@ -109,10 +109,10 @@ M591 D1 P1 C"e1stop" S1										; Regular filament sensor for E1
 ; Add-on settings__________________________________________________
 
 ; Primary hotend Clog detector__________________________________________________
-;M591 D0 P7 C"e0stop" S1 L4.2 E10 R10:1000					; Clog Detector E0 [Add-On]
+;M591 D0 P7 C"e0stop" S1 L3.2 E10 R10:300					; Clog Detector E0 [Add-On]
 
 ;Secondary hotend Clog detector__________________________________________________
-;M591 D1 P7 C"e1stop" S1 L4.2 E10 R10:1000					; Clog Detector E1 [Add-On]
+;M591 D1 P7 C"e1stop" S1 L3.2 E10 R10:300					; Clog Detector E1 [Add-On]
 
 ; Crash detector__________________________________________________
 ;M950 J2 C"zstop" 											; create Input Pin 2 on Z-endstop to for M581 Command.
