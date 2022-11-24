@@ -1,8 +1,7 @@
 ; resume.g
 ; called before a print from SD card is resumed
-M106 P0 R1					; Restore fan 0 speed
-M106 P1 R1					; Restore Fan 1 speed
-T R1						; select the tool that was active last time the print was paused
+T R1 P0 					; re-select tool
+M106 R1 					; Set fan 0 to last used speed
 M116 S3						; wait for hotend temperatures to stabilise
 M83                  		; relative extruder moves
 G1 E5 F600         			; extrude 5mm of filament
