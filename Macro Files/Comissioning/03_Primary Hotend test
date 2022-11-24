@@ -41,15 +41,15 @@ M570 H0 P5 T15		; return the the heater H0 fault settings to default
 M300 S1111 P333		; beep
 M291 S2 R"Heater testing" P"Did the hotend heat up to 210c as it should?"
 
-M291 S2 R"Extruder testing" P"The extruder will now spin in a clockwise direction for 10 seconds"
+M291 S2 R"Extruder testing" P"The extruder will now extrude filament for 10 seconds"
 M83					; relative extruder moves
-G1 E10 F60 			; extrude 10mm of filament over 10 seconds
+G1 E30 F180			; extrude 30mm of filament over 10 seconds
 G4 P0				; wait for the moves to finish   
 M300 S1111 P333		; beep
 M568 P0 S0 R0		; set temperature to 0c
 T-1					; deselect primary hotend
 M300 S1111 P333		; beep
-M291 S2 R"Extruder testing" P"Did the extruder move in a clockwise direction? If not, check the guide for troubleshooting"
+M291 S2 R"Extruder testing" P"Did the extruder correctly extrude filament? If not, check the guide for troubleshooting"
 
 M291 S3 R"You may proceed to the next step" P"Primary hotend verification has been completed" ;
 M18					; release stepper motors
