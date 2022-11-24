@@ -1,0 +1,55 @@
+; If the printer hasn't been homed, home it
+if !move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed
+	M98 P"config_probe.g"												; Load BLTouch probe settings
+	M280 P0 S60 I1														; clear any probe errors
+	G29 S2                      										; cancel mesh bed compensation
+	G91                    												; relative positioning
+	M913 X50 															; X axis 50% power
+	G1 H2 Z5 F200          												; lift Z relative to current position
+	G1 H1 X{(move.axes[0].max+5)*-1} Y{move.axes[1].max+5} F3000  		; move quickly to X and Y axis endstops and stop there (first pass)
+	G1 H2 X5 Y-5 F600      												; go back a few mm
+	G1 H1 X{(move.axes[0].max+5)*-1} Y{move.axes[1].max+5} F600  		; move slowly to X and Y axis endstops once more (second pass)
+	M913 X100 															; X axis 100% power
+	G90                    												; absolute positioning
+	G1 X{move.axes[0].min+5} Y{move.axes[1].min+5} F6000 				; move to front left
+	G1 F600																; reduce speed
+	G30                    												; home Z by probing the bed
+
+G1 Z30 				; move to Z=30
+G1 X100 Y10 F3000	; move to X100, Y100
+G4 P0 				; wait for all movements to complete
+M300 S1111 P333		; beep
+
+M291 S2 R"Primary blower fan testing" P"The part cooling fan will spin for 10 seconds. Verify that it works"
+M106 P0 S255		; turn part cooling fan at 100%
+G4 S10				; wait 10 seconds
+M106 P0 S0			; turn part cooling off
+G4 P0				; wait
+M300 S1111 P333		; beep
+M291 S2 R"Primary blower fan testing" P"Did the part cooling turn on and off as it should?"
+
+M291 S2 R"Heater testing" P"In the next step, the hotend will heat up to 210c."
+if {global.expansion} = 1
+	M291 S2 R"Heater testing" P"Check that the heatsink fan turns on when the temperature rises above 45c"
+else
+	;
+M570 H0 P50 T50		; Extend the heater H0 fault timeout to 50 seconds for testing
+M568 P0 S210 R0		; set temperature to 210c
+T0					; select primary hotend
+M116 P0				; wait for P0 to reach target temp
+M570 H0 P5 T15		; return the the heater H0 fault settings to default
+M300 S1111 P333		; beep
+M291 S2 R"Heater testing" P"Did the hotend heat up to 210c as it should?"
+
+M291 S2 R"Extruder testing" P"The extruder will now extrude filament for 10 seconds"
+M83					; relative extruder moves
+G1 E30 F180			; extrude 30mm of filament over 10 seconds
+G4 P0				; wait for the moves to finish   
+M300 S1111 P333		; beep
+M568 P0 S0 R0		; set temperature to 0c
+T-1					; deselect primary hotend
+M300 S1111 P333		; beep
+M291 S2 R"Extruder testing" P"Did the extruder correctly extrude filament? If not, check the guide for troubleshooting"
+
+M291 S3 R"You may proceed to the next step" P"Primary hotend verification has been completed" ;
+M18					; release stepper motors
