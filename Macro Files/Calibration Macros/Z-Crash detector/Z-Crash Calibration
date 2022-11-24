@@ -1,0 +1,26 @@
+M300 S555 P666 					; Beep
+M291 S3 P"Press OK to continue, or CANCEL to abort"
+M291 S3 R"Inductive Sensor Calibration" P"If you already have the sensor, this macro will disable it's functionality untill the printer has rebooted" 
+M581 P-1 T0						; disable crash detector
+M280 P7 S160					; reset BLTouch error states
+M300 S1888 P444					; Beep
+M561							; unload bed heightmap
+G28 							; Home
+M561							; unload bed heightmap
+M291 S3 R"Park at the front" P"The head will move to the front left corner"
+M564 S1 H1						; Restrict movement within axis limits and require homing
+G91            					; relative positioning
+G1 Z5 F360     					; lift Z by 5mm    
+G4 P0							; 
+G90     						; absolute positioning
+G1 X100 Y100 F6000 				; move to front left
+G4 S1							; wait
+M291 S3 R"Absolute Z Position" P"The head will move to Z=0"
+G1 Z0 F120						; move to Z0
+G4 P0							; wait for the moves to be done
+M291 S3 R"Inductive Sensor Calibration" P"Rotate the thumbscrew counter clockwise towards the inductive sensor untill the LED is on" T0
+G4 P10							; wait
+M291 S3 R"Inductive Sensor Calibration" P"Rotate the thumbscrew clockwise by 1mm or half a turn of the thumbscrew. Make sure that the LED is Off"
+G4 P10							; wait
+M291 S3 R"Inductive Sensor Calibration" P"Please Proceed to the configuration steps per the assembly guide" 
+M291 S3 R"Inductive Sensor Calibration" P"If you have already enabled the sensor in the configuration, reboot your printer to re-activate the sensor" 
