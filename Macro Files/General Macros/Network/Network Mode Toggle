@@ -1,0 +1,12 @@
+if {global.networking} = 1
+	set global.networking = 2
+	echo >"0:/sys/config_networking.g" "global networking = 2 ; Printer is setup to create a local access point"
+	echo >>"0:/sys/config_networking.g" "M552 S2 ; Boot the printer up in access point mode"
+	M291 S2 R"Access Point mode enabled" P"Reboot your printer to boot up in access point mode"
+elif {global.networking} = 2
+	set global.networking = 1
+	echo >"0:/sys/config_networking.g" "global networking = 1 ; Printer is setup to connect to your local WiFi network"
+	echo >>"0:/sys/config_networking.g" "M552 S1 ; Boot the printer up with it connecting to your local WiFi network"
+	M291 S2 R"WiFI mode has been switched" P"Reboot your printer for it to connect to your local network"
+else
+	G4 P1

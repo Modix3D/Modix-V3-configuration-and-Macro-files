@@ -12,20 +12,26 @@ G4 S15
 
 if {global.printhead} = 1
 	M291 S2 R"Printhead verification" P"According to your configuration file, you have the Griffin printhead installed on your printer"
-	echo "According to your configuration file, you have the Griffin printhead installed on your printer"
+	echo "According to your configuration file, you have the Griffin printhead installed"
+	M291 S3 R"Printhead verification" P"See the guide for comparison pictures. Press Cancel if the printhead does not match"
+elif {global.expansion} = 0
+	M291 S2 R"Printhead verification" P"According to your configuration file, you have the E3D Titan Aero printhead installed on your printer"
+	echo "According to your configuration file, you have the E3D Titan Aero printhead installed"
 	M291 S3 R"Printhead verification" P"See the guide for comparison pictures. Press Cancel if the printhead does not match"
 else
-	M291 S2 R"Printhead verification" P"According to your configuration file, you have the E3D Titan Aero printhead installed on your printer"
-	M291 S3 R"Printhead verification" P"See the guide for comparison pictures. Press Cancel if the printhead does not match"
-	echo "According to your configuration file, you have the E3D Titan Aero printhead installed on your printer"
+	G4 P0
+
 if {global.expansion} = 1
 	M291 S2 R"Control board verification" P"According to your configuration file, you have the Duex expansion board installed on your printer"
+	echo "According to your configuration file, you have the Duex expansion board installed"
 	M291 S3 R"Control board verification!" P"See the guide for comparison pictures. Press Cancel if the board does not match"
-	echo "According to your configuration file, you have the Duex expansion board installed on your printer"
-else
+elif {global.expansion} = 0
 	M291 S2 R"Control board verification" P"According to your configuration file, you have the Duet mainboard installed on your printer"
+	echo "According to your configuration file, you have the Duet mainboard installed"
 	M291 S3 R"Control board verification!" P"See the guide for comparison pictures. Press Cancel if the board does not match"
-	echo "According to your configuration file, you have the Duet mainboard installed on your printer"
+else
+	G4 P0
+
 
 M291 S3 R"Verify the bed height" P"According to the guide, check that the bed is positioned so that you have some space between the probe and bed, 10mm or more is recommended."
 M291 S3 R"Verify the bed height" P"If you do not have this space, check the guide on how to move the bed down"
@@ -52,19 +58,19 @@ M291 S3 R"Printhead moved to the front" P"Check the troubleshooting if it moved 
 M291 S3 R"Home and Move to the front left" P"The printer will home the X axis, and then the Y axis, then move to the front left (X100, Y100)"
 M291 S3 R"Home and Move to the front left" P"The X and Y axis motors have their power reduced to 50% of max power and run at reduced speeds"
 
-M913 X50 															; X axis 40% power
-M913 Y50															; Y axis 40% power
-G1 H2 Z10 F200          											; lift Z relative to current position
-G1 H1 X{(move.axes[0].max+5)*-1} F1200  							; move quickly to X endstops and stop there (first pass)
-G1 H2 X5 F600      													; go back a few mm
-G1 H1 X{(move.axes[0].max+5)*-1} Y{move.axes[1].max+5} F300  		; move slowly to X axis endstops once more (second pass)
-G4 S1																; wait 1 second
-G1 H2 Y{move.axes[1].max+5} F1200									; move quickly to Y endstops and stop there (first pass)
-G1 H2 Y-5 F600      												; go back a few mm
-G1 H1 Y{move.axes[1].max+5} F300  									; move slowly to Y axis endstops once more (second pass)
-M913 X100 															; X axis 100% power
-M913 Y100 															; Y axis 100% power
-G4 P0																; wait for movement to complete
+M913 X50 									; X axis 40% power
+M913 Y50									; Y axis 40% power
+G1 H2 Z10 F200          					; lift Z relative to current position
+G1 H1 X{(move.axes[0].max+5)*-1} F1200  	; move quickly to X endstops and stop there (first pass)
+G1 H2 X5 F600      							; go back a few mm
+G1 H1 X{(move.axes[0].max+5)*-1} F300  		; move slowly to X axis endstops once more (second pass)
+G4 S1										; wait 1 second
+G1 H2 Y{move.axes[1].max+5} F1200			; move quickly to Y endstops and stop there (first pass)
+G1 H2 Y-5 F600      						; go back a few mm
+G1 H1 Y{move.axes[1].max+5} F300  			; move slowly to Y axis endstops once more (second pass)
+M913 X100 									; X axis 100% power
+M913 Y100 									; Y axis 100% power
+G4 P0										; wait for movement to complete
 
 M291 S3 R"Move to the front left" P"The printhead will now move to the front left (X100, Y100)"
 G90					; absolute movements
@@ -90,13 +96,13 @@ M291 S2 R"Bed placement verification" P"The printer will first then move to the 
 M291 S2 R"Bed placement verification" P"Verify that the BLTouch is posisioned above the bed in both cases"
 M291 S2 R"Bed placement verification" P"Press OK to move to the left"
 
-G1 X{move.axes[0].min+0.2} Y20 F3000	; move bed to the left side
+G1 X{move.axes[0].min+0.2} Y20 F3000	; move printhead to the left side of the bed
 M300 S1111 P666 						; beep 
 G4 P0									; wait for movement to complete
 M291 S2 R"Left side" P"Verify that the BLTouch and nozzle are positioned above the bed. If they are not above the bed, adjust the bed." ;
 M291 S2 R"Bed placement verification" P"Press OK to move to the right"
 
-G1 X{move.axes[0].max-0.2} Y20 F3000	; move bed to the right side
+G1 X{move.axes[0].max-0.2} Y20 F3000	; move printhead to the right side of the bed
 M300 S1111 P666 						; beep 
 G4 P0									; wait for movement to complete
 M291 S2 R"Right side" P"Verify that the BLTouch and nozzle are positioned above the bed. If they are not above the bed, adjust the bed." ;
