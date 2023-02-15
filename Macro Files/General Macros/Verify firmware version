@@ -2,13 +2,23 @@ echo "The firmware version is: RepRapFirmware", boards[0].firmwareVersion
 echo "The configuration file is:", global.config_version
 echo "The Macro file is: Version 3.4.2 Macro A"
 
-if {global.printhead} = 1
-	echo "According to your configuration file, you have the Griffin printhead installed on your printer"
-else
-	echo "According to your configuration file, you have the E3D Titan Aero printhead installed on your printer"
-if {global.expansion} = 1
-	echo "According to your configuration file, you have the Duex expansion board installed on your printer"
-else
-	echo "According to your configuration file, you have the Duet mainboard installed on your printer"
-	
+if {global.generation} = 4
+	echo "According to your configuration file, you have A Version 4 printer."
+	echo "According to your configuration file, you have the Griffin printhead installed."
+	echo "According to your configuration file, you have the Duex expansion board installed."
+elif {global.generation} = 3
+	echo "According to your configuration file, you have A Version 3 printer."
+	if {global.printhead} = 1
+		echo "According to your configuration file, you have the Griffin printhead installed."
+	else
+		echo "According to your configuration file, you have the E3D Titan Aero printhead installed."
+	if {global.expansion} = 1
+		echo "According to your configuration file, you have the Duex expansion board installed."
+	else
+		echo "According to your configuration file, you have the Duet mainboard installed."
+elif {global.generation} = 2
+	echo "According to your configuration file, you have A Version 2 printer."
+	echo "According to your configuration file, you have the E3D Titan Aero printhead installed."
+	echo "According to your configuration file, you have the Duet mainboard installed."
+
 M291 S2 R"Check the web console" P"Check the web interface console for the results"
