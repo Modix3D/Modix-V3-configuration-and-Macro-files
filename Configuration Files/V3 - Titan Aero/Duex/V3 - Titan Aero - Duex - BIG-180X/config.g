@@ -22,11 +22,11 @@ G4 P300														; wait 300ms
 
 ; Drives_________________________________________________________________________
 ;Main board______________________________________________________________________
-M569 P0 S0													; Physical drive 0 . X1
-M569 P1 S1													; Physical drive 1 . X2
-M569 P2 R-1													; Physical drive 2 . Canceled
-M569 P3 S1													; Physical drive 3 . Main Extruder
-M569 P4 S0													; Physical drive 4 . Secondary Extruder
+M569 P0 S0													; Physical drive 0. X1
+M569 P1 S1													; Physical drive 1. X2
+M569 P2 R-1													; Physical drive 2. Disabled
+M569 P3 S0													; Physical drive 3. Primary Extruder
+M569 P4 S0													; Physical drive 4. Secondary Extruder
 ;Duex5 board_____________________________________________________________________
 M569 P5 S0													; Physical drive 5 . Y
 M569 P6 S0													; Physical drive 6 . Z1 (0,600) 
@@ -71,7 +71,7 @@ M98 P"config_probe.g"										; Load the Z-offset from the config_probe.g file
 M140 H-1                                       				; disable heated bed (overrides default heater mapping)
 
 ;E0_________________________________________________________________
-M308 S0 P"e0temp" Y"thermistor" T100000 B4725   			; configure sensor 0 as thermistor on pin e0temp
+M308 S0 P"e0temp" Y"thermistor" T100000 B4725 C7.06e-8   			; configure sensor 0 as thermistor on pin e0temp
 ;M308 S0 P"spi.cs1" Y"rtd-max31865"							; Configure sensor 0 as PT100 via the daughterboard
 ;M308 S0 P"e0temp" Y"pt1000"								; Configure sensor 0 as PT1000 on pin e0temp
 M950 H0 C"e0heat" T0                            			; create nozzle heater output on e0heat and map it to sensor 0
@@ -81,7 +81,7 @@ M143 H0 S285                                    			; set temperature limit for h
 
 if {global.printheads} = 2
 	;E1_________________________________________________________________
-	M308 S1 P"e1temp" Y"thermistor" T100000 B4725   		; configure sensor 1 as thermistor on pin e1temp
+	M308 S1 P"e1temp" Y"thermistor" T100000 B4725 C7.06e-8   		; configure sensor 1 as thermistor on pin e1temp
 	;M308 S1 P"spi.cs2" Y"rtd-max31865"						; Configure sensor 1 as PT100 via the daughterboard
 	;M308 S1 P"e1temp" Y"pt1000"							; Configure sensor 1 as PT1000 on pin e1temp
 	M950 H1 C"e1heat" T1									; create nozzle heater output on e1heat and map it to sensor 1

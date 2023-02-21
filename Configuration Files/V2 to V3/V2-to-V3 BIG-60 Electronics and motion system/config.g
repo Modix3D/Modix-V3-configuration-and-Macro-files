@@ -16,16 +16,16 @@ M575 P1 B57600 S1											; Set auxiliary serial port baud rate and require ch
 ; Network_____________________________________________________________________
 M550 P"Big 60 V2 to V3"                      				; set printer name
 ;M551 P"MODIX3D"               								; Set password (optional)
-M98 P"config_networking.g"									; enable network
-G4 P300 													; wait 300ms before continuing
+M98 P"config_networking.g"									; load networking settings
+G4 P300														; wait 300ms
 ;M552 P0.0.0.0												; Uncomment this command for using Duet Ethernet board
 
 ; Drives_________________________________________________________________________
-M569 P0 S1                                            		; Physical drive 0 goes forwards. X-Axis.
-M569 P1 S0                                                 	; Physical drive 1 goes backwards. Y-Axis.
-M569 P2 S0                                                  ; Physical drive 2 goes backwards. Z-Axis.
-M569 P3 S1                                                  ; Physical drive 3 goes forwards. E0-Extruder.
-M569 P4 S0                                                  ; Physical drive 4 goes backwards. E1-Extruder.
+M569 P0 S1                                            		; Physical drive 0. X-Axis
+M569 P1 S0                                                 	; Physical drive 1. Y-Axis
+M569 P2 S0                                                  ; Physical drive 2. Z-Axis
+M569 P3 S0													; Physical drive 3. Primary Extruder
+M569 P4 S0													; Physical drive 4. Secondary Extruder
 
 ;Motor to stepper motor driver mapping_________________________________________________________
 M584 X0 Y1 Z2 E3:4 P3										; Driver mapping
@@ -62,7 +62,7 @@ M98 P"config_probe.g"										; Load the Z-offset from the config_probe.g file
 M140 H-1                                       				; disable heated bed (overrides default heater mapping)
 
 ;E0_________________________________________________________________
-M308 S0 P"e0temp" Y"thermistor" T100000 B4725   			; configure sensor 0 as thermistor on pin e0temp
+M308 S0 P"e0temp" Y"thermistor" T100000 B4725 C7.06e-8   			; configure sensor 0 as thermistor on pin e0temp
 ;M308 S0 P"spi.cs1" Y"rtd-max31865"							; Configure sensor 0 as PT100 via the daughterboard
 ;M308 S0 P"e0temp" Y"pt1000"								; Configure sensor 0 as PT1000 on pin e0temp
 M950 H0 C"e0heat" T0                            			; create nozzle heater output on e0heat and map it to sensor 0
@@ -71,7 +71,7 @@ M98 P"PID_tune_E0.g" R1										; PID calibration
 M143 H0 S285                                    			; set temperature limit for heater 0 to 285C
 
 ;E1_________________________________________________________________
-M308 S1 P"e1temp" Y"thermistor" T100000 B4725   			; configure sensor 1 as thermistor on pin e1temp
+M308 S1 P"e1temp" Y"thermistor" T100000 B4725 C7.06e-8   			; configure sensor 1 as thermistor on pin e1temp
 ;M308 S1 P"spi.cs2" Y"rtd-max31865"							; Configure sensor 1 as PT100 via the daughterboard
 ;M308 S1 P"e1temp" Y"pt1000"								; Configure sensor 0 as PT1000 on pin e0temp
 M950 H1 C"e1heat" T1                            			; create nozzle heater output on e1heat and map it to sensor 1
