@@ -21,9 +21,9 @@ G4 P300														; wait 300ms
 ;M552 P0.0.0.0												; Uncomment this command for using Duet Ethernet board
 
 ; Drives_________________________________________________________________________
-M569 P0 S1                                            		; Physical drive 0. X-Axis
-M569 P1 S0                                                 	; Physical drive 1. Y-Axis
-M569 P2 S0                                                  ; Physical drive 2. Z-Axis
+M569 P0 S1													; Physical drive 0. X-Axis
+M569 P1 S0													; Physical drive 1. Y-Axis
+M569 P2 S0													; Physical drive 2. Z-Axis
 M569 P3 S0													; Physical drive 3. Primary Extruder
 M569 P4 S0													; Physical drive 4. Secondary Extruder
 
