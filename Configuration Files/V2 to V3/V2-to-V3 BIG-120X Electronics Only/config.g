@@ -6,6 +6,7 @@ global generation = 2 ; Version 2 to version 3 printer
 global printhead = 0 ; Aero printhead
 global expansion = 0 ; no expansion board is installed
 global printheads = 2 ; Dual printhead, change this value to 1 to switch it to a single-printhead setup
+global idex = 0			; no IDEX
 
 ; General preferences_________________________________________________________
 G90                                             			; send absolute coordinates...

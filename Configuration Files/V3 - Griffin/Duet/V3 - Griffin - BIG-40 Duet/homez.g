@@ -5,6 +5,9 @@ M98 P"config_probe.g"									; Load BLTouch probe settings
 M280 P0 S60 I1											; clear any probe errors
 G29 S2                      							; cancel mesh bed compensation
 
+if {global.idex} = 1
+	T-1 P0													; Deselect all tools
+
 G91                 									; relative positioning
 G1 H2 Z5 F200      										; lift Z relative to current position
 G90                    									; absolute positioning
