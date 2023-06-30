@@ -5,7 +5,8 @@ M83																							; Extruder relative moves
 G1 E-5 F2700 																				; Retract a bit
 
 M568 P0 R0 S0																				; set primary hotend temperatures to 0
-M568 P1 R0 S0																				; set secondary hotend temperatures to 0
+if {global.printheads} = 2
+	M568 P1 R0 S0																			; set secondary hotend temperatures to 0
 M106 S0																						; set fans to 0
 T-1 P0																						; deselect any tools
 G4 P1																						; dwell 1ms

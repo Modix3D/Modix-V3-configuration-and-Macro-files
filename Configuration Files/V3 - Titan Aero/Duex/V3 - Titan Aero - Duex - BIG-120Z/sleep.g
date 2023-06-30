@@ -4,7 +4,8 @@
 
 M300 S1111 P222														; beep	
 M568 P0 R0 S0														; set primary hotend temperatures to 0
-M568 P1 R0 S0														; set secondary hotend temperatures to 0
+if {global.printheads} = 2
+	M568 P1 R0 S0													; set secondary hotend temperatures to 0
 G4 P1																; dwell 1ms
 M83            														; relative extruder moves
 G1 E-5 F800  														; retract 5mm of filament
