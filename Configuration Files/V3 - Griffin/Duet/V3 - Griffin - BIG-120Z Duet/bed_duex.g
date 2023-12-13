@@ -1,22 +1,22 @@
-M558 H15 F80 															; This raises the probing height from 4mm to 15mm, to increase the range in which the tilt calibration can adjust the bed. 
-M566 Z20	 															; Reducing the Z jerk a slight bit
-M203 Z100	 															; Reducing max Z speed a bit.
-M201 Z60	 															; Reducing Z acceleration a slight bit
+M558 H15 F80															; This raises the probing height from 4mm to 15mm, to increase the range in which the tilt calibration can adjust the bed. 
+M566 Z20																; Reducing the Z jerk a slight bit
+M203 Z100																; Reducing max Z speed a bit.
+M201 Z60																; Reducing Z acceleration a slight bit
 M98 P"config_probe.g"													; Load Z-probe data
-M280 P0 S60 I1															; clear any probe errors
+M280 P0 S60																; clear any probe errors
 T-1																		; deselect any tools
 
 if !move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed	; If the printer hasn't been homed, home it
 	G28
 
-M280 P0 S60 I1															; clear any probe errors
-G29 S2                       											; cancel mesh bed compensation
-M290 R0 S0                   											; cancel baby stepping
+M280 P0 S60																; clear any probe errors
+G29 S2																	; cancel mesh bed compensation
+M290 R0 S0																; cancel baby stepping
 
-G90                          											; absolute moves
-G1 Z5 F400 	                											; insure Z starting position is high enough to avoid probing errors
-G1 X{move.axes[0].min+2} Y{move.axes[1].min+2} F9000 					; move to front left
-G30                          											; do single probe which sets Z to trigger height of Z probe
+G90																		; absolute moves
+G1 Z5 F400																; insure Z starting position is high enough to avoid probing errors
+G1 X{move.axes[0].min+2} Y{move.axes[1].min+2} F9000					; move to front left
+G30																		; do single probe which sets Z to trigger height of Z probe
 
 ; --- level bed ---
 while true
