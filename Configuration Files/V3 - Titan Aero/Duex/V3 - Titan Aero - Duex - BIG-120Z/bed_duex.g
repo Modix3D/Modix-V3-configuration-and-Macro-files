@@ -3,13 +3,11 @@ M566 Z20																; Reducing the Z jerk a slight bit
 M203 Z100																; Reducing max Z speed a bit.
 M201 Z60																; Reducing Z acceleration a slight bit
 M98 P"config_probe.g"													; Load Z-probe data
-M280 P0 S60																; clear any probe errors
 T-1																		; deselect any tools
 
 if !move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed	; If the printer hasn't been homed, home it
 	G28
 
-M280 P0 S60																; clear any probe errors
 G29 S2																	; cancel mesh bed compensation
 M290 R0 S0																; cancel baby stepping
 
@@ -20,13 +18,9 @@ G30																		; do single probe which sets Z to trigger height of Z probe
 
 ; --- level bed ---
 while true
-	M280 P0 S60 I1																													; clear any probe errors
 	G30 P0 X{move.axes[0].min + sensors.probes[0].offsets[0] + 2} Y{move.axes[1].min + sensors.probes[0].offsets[1] + 2} Z-99999	; Probe near front left leadscrew
-	M280 P0 S60 I1																													; clear any probe errors
 	G30 P1 X{move.axes[0].max + sensors.probes[0].offsets[0] - 2} Y{move.axes[1].min + sensors.probes[0].offsets[1] + 2} Z-99999	; Probe near front right leadscrew
-	M280 P0 S60 I1																													; clear any probe errors
 	G30 P2 X{move.axes[0].max + sensors.probes[0].offsets[0] - 2} Y{move.axes[1].max + sensors.probes[0].offsets[1] - 2} Z-99999	; Probe near rear right leadscrew
-	M280 P0 S60 I1																													; clear any probe errors
 	G30 P3 X{move.axes[0].min + sensors.probes[0].offsets[0] + 2} Y{move.axes[1].max + sensors.probes[0].offsets[1] - 2} Z-99999 S4	; Probe near rear left leadscrew
 	
 	if move.calibration.initial.deviation = 0

@@ -1,7 +1,6 @@
 ; homeall.g
 ; called to home all axes
 M98 P"config_probe.g"												; Load BLTouch probe settings
-M280 P0 S60															; clear any probe errors
 G29 S2																; cancel mesh bed compensation
 
 G91																	; relative positioning
