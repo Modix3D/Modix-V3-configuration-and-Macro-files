@@ -4,18 +4,83 @@ We are updating the naming scheme for the firmware updates. The naming scheme wi
 
 For example:
 
-Version 3.4.1 Config A
+Version 3.4.5 Config C
 
-This is compatible with RepRapFimware 3.4.1, and it's the first update to the configuration files (Config A).
+This is compatible with RepRapFimware 3.4.5, and it's the third update to the configuration files (Config C).
 
 If an update to RepRapFirmware happens, and the configuration files have been updated to work with the new RRF update, this will be Version 3.5.0 Config A for the first release.
 
+**3.4.5 Config C update notes**
+This released is aimed to clean up some bugs and mistakes in the previous case, and catch some edge-case failures
 
+Ease of access changes:
+- All files have been pre-seeded with heightmap and PID tuning values, this will help with the calibration setup process
+- bed.g file has been split up in two variants, the printer will automatically use the correct variant based on your config.g
+-- bed_duet.g ; For the tilt calibration on Duet only printers
+-- bed_duex.g ; For the tilt calibration on Duex enabled printers.
+- Updated rehome, sleep and stop files to detect single or dual-extruder setups
+- Added a check for single or dual extruder setups in the rehome, sleep and stop files
+
+Bugfixes:
+- Removed deprecated code from homing files, mesh.g, and bed.g files (M280 P0 S60 I1)
+
+Other:
+- Changed the order of operations in the resume.g to first go to Z+5, then XY position, then back to the previous Z position. This fixes an edge-case where homing the Z axis would result in a crash
+- Config.g now has some extra parameters that are used in some other files to check on what code to execute.
 **3.4.1 Config D update notes** 
 
 - Fixed a bug with the Griffin auto-Z probe for the Duet enabled printers
 - Updated the tilt calibration process to better work with the Griffin
 - the Z-offset and PID macro's now automatically write their results of their calibration processes to config_probe.g and PID_tune_E0.g or PID_tune_E1.g, no longer requiring you to edit those files manually.
+
+**3.4.5 Config B Updated notes**
+
+Overall changes:
+
+- Added more global identifiers at the top of the configuration file
+- Networking modes can now be set using a macro command. Configuration file reads the set networking mode using the config_networking.g file
+- Tweaks to the acceleration, jerk and speed values for slightly better performance
+- Added a toggle to toggle between a single and dual extruder setup
+- Travel speed while doing probing moves has been increased
+- Removal of the filament-error0.g and filament-error1.g files, as both are now handled using filament-error.g
+- Adjusted the BLTouch probing settings
+	- Probing height, reduced from 5 to 4mm
+	- Probing speed, slightly reduced from 120 to 100mm/min, to increase accuracy slightly
+	- Travel speed between probing points, increased from 6000mm/min to 8000mm/min
+	- Rest time after probing, reduced from 0.7 seconds to 0.5 seconds 
+
+Duex enabled printers:
+- Auto Tilt Calibration uses a 10mm probing height instead of 5mm to increase the initial range of tilt the printer can compensate for, and decrease the possibility of a crash
+- Reduced jerk and acceleration settings of the Z axis during the Auto Tilt Calibration to improve accuracy
+
+V2 to V3:
+- Big60: Made the tilt calibration uses a 3 point leveling system instead of 4
+
+Macro files:
+- There is now a networking folder, containing several macro's for networking purposes. These include: "Create Access Point Network", "Disable WiFi", "Network Mode Toggle" and "WiFi reset"
+	- Create access point networl: Creates Access Point setup, see also the networking setup step
+	- Disable WiFi - Disables the WiFi module until next reboot
+	- Network mode toggle - Toggles the printer between using the regular networking mode and access point mode. This persists between reboots
+	- WiFi Reset - a way to reset the WiFi module after networking problems
+
+**3.4.2 Config A update notes**
+Macro file updates:
+- Added commissioning macro files for first-time-use, to test out the machine and verify everything is setup properly
+- Improved the general readability and clarity of messages
+- Added a macro in the general macro's folder to report the firmware version, configuration file version, macro files verion, and printer setup according to the configuration files
+
+Configuration file updates
+- Fixed a bug that would not properly restore the fan speed after a pause
+- Added parameters to the config.g that would allow for verification of the installed firmware, configuration, and macro files
+
+hotfix
+- Updated the commissioning macro to fix a spelling mistake
+- Changed G1 H2 to G1 H1 in the Y homing section of the comissioning macro
+
+**3.4.1 Config D update notes** 
+- Updates to the Griffin functionality
+- Updates to the Z-offset calibration macro's. The Z-offset macro now automatically saves the Z-offset data to the Z-probe
+- Various bugfixes
 
 **3.4.1 Config C update notes** 
 
