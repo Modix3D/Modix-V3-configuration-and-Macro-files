@@ -6,6 +6,7 @@ global generation = 3 ; Generation 3 printer
 global printhead = 0 ; Aero printhead
 global expansion = 1 ; Duex expansion board is installed
 global printheads = 2 ; Dual printhead, change this value to 1 to switch it to a single-printhead setup
+global idex = 0			; no IDEX
 
 ; General preferences_________________________________________________________
 G90															; send absolute coordinates...
@@ -41,10 +42,10 @@ M671 X-185:-185:1268:1268 Y668:-46:-46:668 S30    			; Anticlockwise
 ;Motor settings and acceleration limits___________________________________________________________________
 M350 X16 Y16 Z16 E16:16 I1									; Configure microstepping with interpolation
 M92 X100 Y100 Z2000 E418.5:418.5							; Set steps per mm
-M566 X360 Y360 Z30 E3600:3600 P1							; Set maximum instantaneous speed changes (mm/min)
-M203 X9000 Y9000 Z200 E5000:5000							; Set maximum speeds (mm/min)
+M566 X360 Y360 Z30 E3000:3000 P1							; Set maximum instantaneous speed changes (mm/min)
+M203 X9000 Y9000 Z400 E6000:6000							; Set maximum speeds (mm/min)
 M201 X1000 Y1000 Z200 E5000:5000							; Set accelerations (mm/s^2)
-M204 P500													; Set print and travel accelerations  (mm/s^2)
+M204 P500 T1000												; Set print and travel accelerations  (mm/s^2)
 M906 X1800 Y1800 E1000:1000 Z1800 I50						; Set motor currents (mA) and motor idle factor in per cent
 M84 S100													; Set idle timeout - 100 seconds
 

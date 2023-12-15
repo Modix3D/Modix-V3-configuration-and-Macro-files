@@ -6,6 +6,7 @@ global generation = 3 ; Generation 3 printer
 global printhead = 1 ; Griffin printhead
 global expansion = 0 ; no expansion board is installed
 global printheads = 2 ; Dual printhead, change this value to 1 to switch it to a single-printhead setup
+global idex = 0			; no IDEX
 
 ; General preferences_________________________________________________________
 G90                                             			; send absolute coordinates...
@@ -21,9 +22,9 @@ G4 P300														; wait 300ms
 ;M552 P0.0.0.0												; Uncomment this command for using Duet Ethernet board
 
 ; Drives_________________________________________________________________________
-M569 P0 S1                                            		; Physical drive 0. X-Axis
-M569 P1 S0                                                 	; Physical drive 1. Y-Axis
-M569 P2 S0                                                  ; Physical drive 2. Z-Axis
+M569 P0 S1													; Physical drive 0. X-Axis
+M569 P1 S0													; Physical drive 1. Y-Axis
+M569 P2 S0													; Physical drive 2. Z-Axis
 M569 P3 S0													; Physical drive 3. Primary Extruder
 M569 P4 S0													; Physical drive 4. Secondary Extruder
 
@@ -33,10 +34,10 @@ M584 X0 Y1 Z2 E3:4 P3										; Driver mapping
 ;Motor settings and acceleration limits___________________________________________________________________
 M350 X16 Y16 Z16 E16:16 I1									; Configure microstepping with interpolation
 M92 X100 Y100 Z2000 E418.5:418.5							; Set steps per mm
-M566 X360 Y360 Z30 E3600:3600 P1							; Set maximum instantaneous speed changes (mm/min)
-M203 X9000 Y9000 Z200 E5000:5000							; Set maximum speeds (mm/min)
+M566 X360 Y360 Z30 E3000:3000 P1							; Set maximum instantaneous speed changes (mm/min)
+M203 X9000 Y9000 Z400 E6000:6000							; Set maximum speeds (mm/min)
 M201 X1000 Y1000 Z200 E5000:5000							; Set accelerations (mm/s^2)
-M204 P500													; Set print and travel accelerations  (mm/s^2)
+M204 P500 T1000												; Set print and travel accelerations  (mm/s^2)
 M906 X1800 Y1800 E1000:1000 Z2300 I50						; Set motor currents (mA) and motor idle factor in per cent
 M84 S100													; Set idle timeout - 100 seconds
 
@@ -49,7 +50,7 @@ M574 X1 S1 P"xstop"                            				; configure switch-type (e.g.
 M574 Y2 S1 P"ystop"                            				; configure switch-type (e.g. microswitch) endstop for low end on Y via pin ystop
 
 ; Z-Probe
-M558 P9 C"zprobe.in" H5 F120 T6000 A1 R0.7					; BLTouch probing settings
+M558 P9 C"zprobe.in" H4 F180 T9000 R0.5						; BLTouch probing settings
 M950 S0 C"exp.heater3"										; set probe pin
 M376 H100			                						; Height (mm) over which to taper off the bed compensation
 G31 P500 X-25.5 Y26.9										; BLTouch X and Y offset
