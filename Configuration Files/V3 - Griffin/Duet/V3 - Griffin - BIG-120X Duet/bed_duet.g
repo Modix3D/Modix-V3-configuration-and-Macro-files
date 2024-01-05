@@ -76,11 +76,17 @@ G91 			; relative moves
 G1 Z10 F200		; Raise nozzle 10mm
 G90 			; absolute movements
 M300 S666 P666 	; beep
-G1 X{move.axes[0].min+2} Y{move.axes[1].max-2} F6000 ; rear right
+G1 X{move.axes[0].min+2} Y{move.axes[1].max-2} F6000 ; rear left
 
 G91 			; relative moves
 G1 Z-10 F200	; lower nozzle 10mm
 G90 			; absolute movements
+M18 Z 			; disable Z stepper motors
+
+M291 S2 R"Rear-left corner" P"Place the bracket and adjust the Z height by manually rotating the ball screw until slight friction can be noticed" ; 
+M300 S666 P666 ; 
+M291 S2 R"Please remove the bracket" P"Press OK only after the bracket has been removed"  ;
+
 
 G1 X{move.axes[0].min+2} Y{move.axes[1].min+2} Z5 F6000 				; move to front left
 M558 H4 																; BLTouch probing settings
