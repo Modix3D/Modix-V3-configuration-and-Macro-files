@@ -2,7 +2,7 @@
 ; called when a print from SD card is paused
 M300 S1111 P222																				; beep
 G4 P1																						; dwell 1ms
-M8																							; relative extruder moves
+M83																							; relative extruder moves
 G1 E-5 F800																					; retract 5mm of filament
 G91																							; relative moves
 if {(move.axes[2].machinePosition) < (move.axes[2].max - 10)} 								; check if there's sufficient space to raise head
