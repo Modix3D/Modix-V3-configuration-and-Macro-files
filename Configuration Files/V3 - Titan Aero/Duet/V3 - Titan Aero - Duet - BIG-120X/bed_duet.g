@@ -98,11 +98,7 @@ M98 P"config_probe.g"
 G30																		; do single probe which sets Z to trigger height of Z probe
 M18 XY																	; release XY stepper motors
 
-M291 S2 R"Rear-Left" P"Place the bracket and adjust the Z height by manually rotating the ball screw until slight friction can be noticed" ;
 
-
-M300 S666 P666 	; beep
-M291 S2 R"Please remove the bracket" P"Press OK only after the bracket has been removed"  
 M300 S666 P666 	; beep
 M564 S1 H1     	; Negative movements are forbidden
 M291 S2 R"Tilt calibration has been completed" P"You may proceed to the next step"
